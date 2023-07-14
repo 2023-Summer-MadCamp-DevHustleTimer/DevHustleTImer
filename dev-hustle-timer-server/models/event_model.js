@@ -18,6 +18,7 @@ class Event extends Sequelize.Model {
                 type: Sequelize.STRING(1000),
                 allowNull: false,
             },
+
         }, {
             sequelize,
             modelName: 'Event',
@@ -31,6 +32,8 @@ class Event extends Sequelize.Model {
         db.Event.hasMany(db.Music, { foreignKey: 'eventId', sourceKey: 'id' });
         db.Event.hasMany(db.TimeTable, { foreignKey: 'eventId', sourceKey: 'id' });
         db.Event.hasMany(db.Message, { foreignKey: 'eventId', sourceKey: 'id' });
+        db.Event.belongsTo(db.User,{foreignKey:'hostId',targetKey:'id'});
+
     }
 }
 module.exports = Event;

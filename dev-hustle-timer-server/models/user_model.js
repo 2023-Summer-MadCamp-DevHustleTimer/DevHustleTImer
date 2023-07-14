@@ -4,8 +4,9 @@ class User extends Sequelize.Model {
         const str0 = "0".repeat(2427);
         User.init({
             deviceId: {
-                type: Sequelize.STRING(1000),
+                type: Sequelize.STRING(255),
                 allowNull: true,
+                unique: true,
             },
             nickname: {
                 type: Sequelize.STRING(1000),
@@ -28,6 +29,7 @@ class User extends Sequelize.Model {
         db.User.hasMany(db.Notification, { foreignKey: 'writerId', sourceKey: 'id' });
         db.User.hasMany(db.Music, { foreignKey: 'writerId', sourceKey: 'id' });
         db.User.hasMany(db.Message, { foreignKey: 'writerId', sourceKey: 'id' });
+        db.User.hasOne(db.Event, { foreignKey: 'hostId', sourceKey: 'id' });
     }
 }
 module.exports = User;

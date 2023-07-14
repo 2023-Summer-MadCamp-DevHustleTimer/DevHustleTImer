@@ -3,18 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const {sequelize} = require('./models');
-
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const { sequelize } = require('./models');
 
 var app = express();
 
 //sequalize init
-sequelize.sync({force:false}).then(()=>{
+sequelize.sync({ force: false }).then(() => {
   console.log('db연결 성공');
-}).catch((err)=>{
+}).catch((err) => {
   console.error(err);
 });
 
@@ -28,16 +24,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//router init
+
+var indexRouter = require('./routes/index');
+var eventRouter = require('./routes/event_router');
+var meRouter = require('./routes/me_router');
+
+app.use('/api', indexRouter);
+app.use('/api/event',eventRouter);
+app.use('/api/me',meRouter);
+
+
+
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
