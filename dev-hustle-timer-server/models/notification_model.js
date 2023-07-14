@@ -18,6 +18,7 @@ class Notification extends Sequelize.Model {
             modelName: 'Notification',
             tableName: 'notification',
             timestamps: true,
+            paranoid: true,
         })
     }
     static associate(db) {

@@ -24,6 +24,7 @@ class Event extends Sequelize.Model {
             modelName: 'Event',
             tableName: 'event',
             timestamps: true,
+            paranoid: true,
         });
     }
     static associate(db) {

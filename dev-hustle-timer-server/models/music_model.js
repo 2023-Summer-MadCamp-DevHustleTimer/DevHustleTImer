@@ -11,6 +11,7 @@ class Music extends Sequelize.Model{
         modelName: 'Music',
         tableName: 'music',
         timestamps: true,
+        paranoid: true,
     })
 
     }

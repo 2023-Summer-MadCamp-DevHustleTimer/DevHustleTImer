@@ -12,6 +12,7 @@ class TimeTable extends Sequelize.Model {
             ,
             tableName: 'timeTable',
             timestamps: true,
+            paranoid: true,
 
         });
     }

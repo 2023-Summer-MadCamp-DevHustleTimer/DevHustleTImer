@@ -14,6 +14,7 @@ class Message extends Sequelize.Model {
                 modelName: 'Message',
                 tableName: 'message',
                 timestamps: true,
+                paranoid : true,
             }
         );
     }

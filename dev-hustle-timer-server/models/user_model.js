@@ -22,6 +22,7 @@ class User extends Sequelize.Model {
             modelName: 'User',
             tableName: 'user',
             timestamps: true,
+            paranoid: true,
         });
     }
     static associate(db) {

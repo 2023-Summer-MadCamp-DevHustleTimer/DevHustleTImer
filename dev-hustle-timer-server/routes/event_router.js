@@ -28,9 +28,9 @@ router.post('/create', async function (req, res, next) { // 새로운 이벤트 
 
 
     try {
-        let user = await User.findOne({ where: { deviceId: agentId + "1" } });
+        let user = await User.findOne({ where: { deviceId: agentId } });
         if (!user) {
-            user = await User.create({ deviceId: agentId + "1", nickname: nickname });
+            user = await User.create({ deviceId: agentId, nickname: nickname });
         }
         //Todo: user.eventId is null이면 진행시켜~~
         const event = await Event.create({
@@ -44,11 +44,59 @@ router.post('/create', async function (req, res, next) { // 새로운 이벤트 
         user.eventId = event.id;
         await user.save();
 
-        res.send('Event created successfully');
+        res.json(event);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error creating event');
     }
 });
+
+router.post('/join', async function (req, res, next) {
+    const deviceId = req.headers['user-agent'];
+    const { nickname, eventNum } = req.body;
+    console.log(deviceId);
+    console.log(eventNum);
+    try {
+        const event = await Event.findOne({ where: { eventNum: eventNum } })
+        let user = await User.findOne({ where: { deviceId: deviceId } });
+        if (!user) {
+            user = await User.create({ deviceId: agentId, nickname: nickname });
+        }
+        //Todo: user.eventId is null이면 진행시켜~~
+        if (!event) {
+            res.status(404).json({ message: 'event not found' });
+        }
+        user.eventId = event.id;
+        await user.save();
+        res.json(event);
+
+    } catch {
+        res.status(404).json({ message: 'event not found' });
+    }
+
+});// 이벤트에 참가
+router.post('/withdraw', async function (req, res, next) {
+    const deviceId = req.headers['user-agent'];
+    console.log(deviceId);
+    console.log(eventNum);
+    try {
+
+        const user = await User.findOne({ where: { deviceId: deviceId } });
+        if (!user) {
+            res.status(404).json({ message: 'user not found' });
+
+        }
+        const event = await Event.findOne({ where: { id: user.eventId } });
+        if (!event) {
+            res.status(404).json({ message: 'event not found' });
+        }
+        await user.destroy();
+        res.json(event);
+
+    } catch {
+        res.status(404).json({ message: 'event not found' });
+    }
+}
+);
 
 module.exports = router;
