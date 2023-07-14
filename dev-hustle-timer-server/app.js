@@ -3,11 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const {sequelize} = require('./models');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+//sequalize init
+sequelize.sync({force:false}).then(()=>{
+  console.log('db연결 성공');
+}).catch((err)=>{
+  console.error(err);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
