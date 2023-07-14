@@ -29,10 +29,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 var indexRouter = require('./routes/index');
 var eventRouter = require('./routes/event_router');
 var meRouter = require('./routes/me_router');
+var messageRouter = require('./routes/message_router');
 
 app.use('/api', indexRouter);
 app.use('/api/event',eventRouter);
 app.use('/api/me',meRouter);
+app.use('/api/message',messageRouter);
 
 
 
