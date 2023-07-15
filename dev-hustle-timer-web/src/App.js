@@ -24,6 +24,7 @@ function App() {
         공지사항 입니다. 속보입니다 속보
       </div>
       <section id="circle">
+        tes
         
         <article className="face1">
           안녕1
@@ -45,6 +46,7 @@ function App() {
 
 
         </article>
+        
       </section>
 
     </div>

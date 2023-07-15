@@ -2,6 +2,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
+  perspective: 10000px;
 }
 
 .wrap>video {
@@ -11,19 +12,27 @@
   position: fixed;
   opacity: 0.5;
 }
-
+@keyframes identifier {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+  
+}
 .wrap #circle {
-  width: 600px;
+  width: 1000px;
   height: 800px;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left:-300px;
+  margin-left:-500px;
   margin-top:-400px;
   transform-style: preserve-3d;
-  perspective: 1300px;
   
   border: 1px solid red;
+  animation: identifier linear 50s infinite;
 }
 
 .wrap #circle article {
@@ -32,24 +41,33 @@
   position: absolute;
   top: 0px;
   left: 0px;
+  
   border: 1px solid blue;
  backface-visibility: hidden; 
+ background-color: rgba(255,255,255,0.5);
 }
 
 .face1 {
-  transform: rotateY(0deg) translateZ(-382px);
+  transform: rotateY(0deg) translateZ(637px);
 }
-
 .face2 {
-  transform: rotateY(90deg) translateZ(-382px);
-  /* transform-origin: right center; */
+  transform: rotateY(90deg) translateZ(637px);
 }
-
 .face3 {
-  transform: rotateY(180deg) translateZ(-382px);
-  /* transform-origin: right center; */
+  transform: rotateY(180deg) translateZ(637px);
 }
-
 .face4 {
-  transform: rotateY(270deg) translateZ(-382px)
+  transform: rotateY(270deg) translateZ(637px);
+}
+.face5 {
+  /* transform: rotateY(180deg) translateZ(764px); */
+}
+.face6 {
+  transform: rotateY(225deg) translateZ(-764px);
+}
+.face7 {
+  transform: rotateY(270deg) translateZ(-764px);
+}
+.face8 {
+  transform: rotateY(315deg) translateZ(-764px);
 }
