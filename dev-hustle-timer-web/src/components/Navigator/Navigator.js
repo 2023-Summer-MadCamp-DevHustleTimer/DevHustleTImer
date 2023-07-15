@@ -1,14 +1,13 @@
 import React from "react";
 import "./Navigator.css";
+import { useSelector } from "react-redux";
 
 const Navigator = () => {
+  const index = useSelector((state) => state.index);
   return (
     <div className="right_section">
       <div className="Navigator">
-        Navigator
-      </div>
-      <div className="right_content">
-        right_content
+        Navigator seems ${index}
       </div>
     </div>
   );
