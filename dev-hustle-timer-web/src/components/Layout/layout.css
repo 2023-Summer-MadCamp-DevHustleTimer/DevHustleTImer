@@ -1,0 +1,24 @@
+@font-face { /* 애플산돌고딕 폰트 적용 */
+  font-family: "BMHANNA_11yrs_ttf";
+  src: url("../../font/BMHANNA_11yrs_ttf.ttf") format("truetype");
+  font-weight: normal;
+}
+
+* {
+  font-family: 'BMHANNA_11yrs_ttf', serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh; /* 화면 높이를 기준으로 설정 */
+}
+
+.left {
+  flex: 1; /* 남은 공간을 전부 차지 */
+  background-color: #f0f0f0;
+}
+
+.right {
+  aspect-ratio: 9 / 19;
+  background-color: #d3d3d3;
+}
