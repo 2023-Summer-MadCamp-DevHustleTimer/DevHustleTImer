@@ -1,0 +1,14 @@
+.right_section {
+  display: flex;
+  flex-direction: column;
+}
+
+.navigator {
+  height: 4vh;
+  background-color: aqua;
+}
+
+.right_content {
+  height: 96vh;
+  background-color: gray;
+}

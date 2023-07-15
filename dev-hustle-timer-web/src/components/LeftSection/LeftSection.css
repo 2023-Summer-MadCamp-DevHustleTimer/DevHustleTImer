@@ -1,0 +1,30 @@
+.left_section {
+  background-color: #CCC5B9;
+  width: inherit;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.notice {
+  padding-top: 4vh;
+  font-size: 2rem;
+}
+
+.timer {
+  padding-bottom: 5vh;
+}
+
+.goal {
+  font-size: 5rem;
+}
+
+.time-left {
+  font-size: 7rem;
+}
+
+.queto {
+  padding-bottom: 4vh;
+  font-size: 1.7rem;
+}

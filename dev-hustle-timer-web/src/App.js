@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import { createStore } from "redux";
+import { Provider, useSelector, useDispatch, connect } from "react-redux";
+import Layout from "./components/Layout/Layout";
+
+function reducer(currentState, action) {
+  if (currentState === undefined) {
+    return {
+      index: 1,
+    };
+  }
+  const newState = { ...currentState };
+  return newState;
+}
+const store = createStore(reducer);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <Layout></Layout>
+      </Provider>
     </div>
   );
 }
