@@ -17,10 +17,36 @@ const store = createStore(reducer);
 
 function App() {
   return (
-    <div className="App">
-      <Provider store={store}>
-        <Layout></Layout>
-      </Provider>
+    <div className="wrap">
+
+      <video src="images/bg.mp4" loop={true} autoPlay={true} muted={true}></video>
+      <div>
+        공지사항 입니다. 속보입니다 속보
+      </div>
+      <section id="circle">
+        
+        <article className="face1">
+          안녕1
+        </article>
+
+
+        <article className="face2">
+          방가워2
+
+
+        </article>
+        <article className="face3">
+          내이름은3
+
+
+        </article>
+        <article className="face4">
+          현수야.4
+
+
+        </article>
+      </section>
+
     </div>
   );
 }
