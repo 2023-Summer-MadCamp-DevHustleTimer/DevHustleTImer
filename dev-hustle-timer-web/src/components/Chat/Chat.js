@@ -3,11 +3,9 @@ import "./Chat.css";
 
 const Chat = () => {
   return (
-    <div className="container">
-      <div className="left">
+    <div>
         Chat
-      </div>
-      <div className="right">Right</div>
+
     </div>
   );
 }

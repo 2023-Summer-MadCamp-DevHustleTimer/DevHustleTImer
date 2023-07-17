@@ -1,17 +1,19 @@
 .right_section {
   display: flex;
   flex-direction: column;
-  height: 95%; 
-  margin-top:2.5vh;
+  height: 95%;
+  margin-top: 2.5vh;
   margin-bottom: 2.5vh;
   margin-right: 2.5vh;
-  transition: all 0.5s; 
-  border: 1px solid rgba(255,255,255,0.5); 
+  transition: all 0.5s;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
-.right_section:hover{
-  background: rgba(255,255,255,0.15); 
-    transform: scale(1.03); 
-}
+
+/* .right_section:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.03);
+} */
+
 .navigator {
   height: 4vh;
   /* background-color: aqua; */
@@ -19,5 +21,25 @@
 
 .right_content {
   height: 96vh;
+  position: relative;
   /* background-color: gray; */
+}
+.rotate-button {
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  /* transform: rotateY(00deg); */
+  transition: transform 0.5s; /* Animation duration, change as needed */
+  backface-visibility: hidden;
+}
+
+.rotated90 {
+  transform: rotateY(90deg); /* 3D horizontal rotation */
+}
+.rotated180{
+  transform: rotateY(180deg);
+}
+.rotated270{
+  transform: rotateY(270deg);
 }
