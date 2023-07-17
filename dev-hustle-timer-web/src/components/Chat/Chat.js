@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Chat.css";
 import axios from "axios";
+import io from "socket.io-client";
 
 const Chat = () => {
 
@@ -9,7 +10,29 @@ const Chat = () => {
 
   useEffect(() => {
 
+    const socket = io("http://localhost:8080");
+    getMessages();
+
+    socket.on("message", (msg) => {
+      console.log("new messages");
+      getMessages();
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+
   }, []);
+
+  async function getMessages() {
+    try {
+      var response = await axios.get('http://localhost:3001/api/me');
+      response = await axios.get('http://localhost:3001/api/message');
+      setMessageList(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleSend = async () => {
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
@@ -32,13 +55,7 @@ const Chat = () => {
     setMessage(e.target.value);
 
     // test
-    try {
-      let response = await axios.get('http://localhost:3001/api/message');
-      // console.log(response.data);
-      setMessageList(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+
   }
 
   const handleKeyPress = (e) => {
@@ -49,14 +66,13 @@ const Chat = () => {
   }
   const renderChatBubbles = () => {
     let reversedMessageList = [];
-  for (let i = messageList.length - 1; i >= 0; i--) {
-    reversedMessageList.push(messageList[i]);
-  }
-  console.log(reversedMessageList);
-    
-    
+    for (let i = messageList.length - 1; i >= 0; i--) {
+      reversedMessageList.push(messageList[i]);
+    }
+
+
     return reversedMessageList.map(function (data, index) {
-      var lr=(data.me ==true ? 'chat-right' : 'chat-left');
+      var lr = (data.me == true ? 'chat-right' : 'chat-left');
       return (
         <div className={`chat-bubble ${lr}`} key={index}>
           {data.text}
