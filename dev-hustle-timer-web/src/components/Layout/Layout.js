@@ -29,7 +29,7 @@ const Layout = () => {
 
     } catch (error) {
       console.log("error")
-      console.log(error.response.data);
+      // console.log(error.response.data);
     }
   }
 

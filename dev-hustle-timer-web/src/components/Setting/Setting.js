@@ -40,7 +40,7 @@ const Setting = () => {
               // console.log(response.data)
           } catch (error) {
               console.log("error")
-               console.log(error.response.data);
+              //  console.log(error.response.data);
           }
           }}
         >

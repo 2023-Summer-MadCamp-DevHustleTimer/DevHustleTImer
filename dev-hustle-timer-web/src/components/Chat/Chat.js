@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "./Chat.css";
 
 const Chat = () => {
@@ -24,28 +24,30 @@ const Chat = () => {
 
   return (
     <div class="cchat">
-
-
       <div className="show-text">
         <div className="chat-bubble chat-left">
           안녕하세요.
           안녕하세요.
           안녕하세요.
+          sdfdsf
           안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.
         </div>
         <div className="chat-bubble chat-left">
-
-          <div>
-            김현수
-          </div>
-          <div>
-            <div className="chat-bu">
-              안녕2안녕안영ㄴㄹㅇㄴㄹㅇㄴㄹㄴㅇ
-            </div>
-            <div>
-              time
-            </div>
-          </div>
+          안녕하세요.
+          안녕하세요.
+          안녕하세요.
+          sdfdsf
+          안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.
+        </div>
+        <div className="chat-bubble chat-left">
+          안녕하세요.
+          안녕하세요.
+          안녕하세요.
+          sdfdsf
+          안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.
+        </div>
+        <div className="chat-bubble chat-left">
+          안녕하세요.
 
         </div>
         <div className="chat-bubble chat-right">
@@ -54,32 +56,32 @@ const Chat = () => {
         <div className="chat-bubble chat-right">
           안녕2
         </div>
+        <div className="chat-bubble chat-right">
+          안녕2
+        </div>
+        <div className="chat-bubble chat-right">
+          안녕2
+        </div>
+        <div className="chat-bubble chat-right">
+          안녕2
+        </div>
+        <div className="chat-bubble chat-right">
+          안녕2
+        </div>
+        <div className="chat-bubble chat-right">
+          안녕2 마지막
+        </div>
+        <div className="chat-bubble chat-right">
+          안녕3 마지막
+        </div>
 
-        <div className="chat-bubble">
-          안녕2
-        </div>
-        <div className="chat-bubble">
-          안녕2
-        </div>
-        <div className="chat-bubble">
-          안녕2
-        </div>
-        <div className="chat-bubble">
-          안녕2
-        </div>
-        <div className="chat-bubble">
-          안녕3
-        </div>
-        <div className="chat-bubble">
-          안녕마지막
-        </div>
       </div>
       <div className="input-text">
         <textarea
           type="text"
           placeholder="여기에 채팅을 입력하고 엔터를 누르세요"
           rows={4}
-           value={message}
+          value={message}
           onChange={handleChange}
 
           onKeyPress={handleKeyPress}
