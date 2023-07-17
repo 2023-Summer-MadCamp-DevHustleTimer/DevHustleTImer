@@ -21,7 +21,6 @@ router.get('/', async function (req, res, next) {
         var modifiedMessage;
         for (const message of messages) {
             const writer = await User.findOne({ where: { id: message.writerId } });
-            console.log(message.writerId, writer.id);
             if (message.writerId !== user.id) {
                 modifiedMessage = { ...message.dataValues, me: false, writer:writer.dataValues};
             

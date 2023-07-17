@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const { User } = require('../models');
+const { User ,Event} = require('../models');
 
 router.get('/',async function(req,res,next){
     const deviceId = req.headers['user-agent'];
@@ -12,7 +12,8 @@ router.get('/',async function(req,res,next){
         try {
             const user = await User.findOne({ where: { deviceId: deviceId } });
             if (user) {
-                res.json(user);
+                const event = await Event.findOne({ where: { id: user.eventId } });
+                res.json({...user.dataValues,event:event.dataValues});
             } else {
                 res.status(404).json({ message: 'user not found' });
             }
