@@ -62,6 +62,7 @@ router.post('/join', async function (req, res, next) {
           eventNum = parsedEventNum;
         } else {
             res.status(404).json({ message: 'code invalid' });
+            return;
         }
       }
     try {
