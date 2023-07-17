@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./RightSection.css";
-import Music from "../Music/Music";
 import Chat from "../Chat/Chat";
+import Music from "../Music/Music";
+import WhenToMeet from "../WhenToMeet/WhenToMeet";
 
 const RightSection = () => {
   console.log(process.env.REACT_APP_YOUTUBE_API_KEY);
@@ -26,13 +27,13 @@ const RightSection = () => {
       <div className={`rotate-button ${whatRotated!=0 ? 'rotated180' : ''}`}>
           <Chat></Chat>
         </div>
-        <div className={`rotate-button ${whatRotated!=3 ? 'rotated180' : ''}`}>
-          <Music></Music>
-        </div>
         <div className={`rotate-button ${whatRotated!=1 ? 'rotated180' : ''}`}>
           <Music></Music>
         </div>
         <div className={`rotate-button ${whatRotated!=2 ? 'rotated180' : ''}`}>
+          <WhenToMeet></WhenToMeet>
+        </div>
+        <div className={`rotate-button ${whatRotated!=3 ? 'rotated180' : ''}`}>
           <Music></Music>
         </div>
       </div>
