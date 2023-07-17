@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import "./Setting.css";
+import axios from 'axios';
 
 const Setting = () => {
   const [message, setMessage] = useState("");
@@ -26,8 +27,17 @@ const Setting = () => {
       </div>
       <div className="buttons-wrapper logout">
         <button
-          onClick={() => {
-            console.log("logout");
+          onClick={async () => {
+            try {
+            
+              let response = await axios.post('http://localhost:3001/api/event/withdraw', {
+              });
+              window.location.reload();
+              // console.log(response.data)
+          } catch (error) {
+              console.log("error")
+               console.log(error.response.data);
+          }
           }}
         >
           방에서 나가기

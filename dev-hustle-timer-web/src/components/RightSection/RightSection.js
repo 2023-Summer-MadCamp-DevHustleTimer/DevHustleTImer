@@ -3,6 +3,7 @@ import "./RightSection.css";
 import Chat from "../Chat/Chat";
 import Music from "../Music/Music";
 import WhenToMeet from "../WhenToMeet/WhenToMeet";
+import Setting from "../Setting/Setting"
 
 const RightSection = () => {
   console.log(process.env.REACT_APP_YOUTUBE_API_KEY);
@@ -34,7 +35,7 @@ const RightSection = () => {
           <WhenToMeet></WhenToMeet>
         </div>
         <div className={`rotate-button ${whatRotated!=3 ? 'rotated180' : ''}`}>
-          <Music></Music>
+          <Setting></Setting>
         </div>
       </div>
     </div >
