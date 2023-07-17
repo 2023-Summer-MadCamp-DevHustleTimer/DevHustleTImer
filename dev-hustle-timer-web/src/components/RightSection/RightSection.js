@@ -10,7 +10,7 @@ const RightSection = () => {
         navigator
       </div>
       <div className="right_content">
-        right_content
+
         <Music></Music>
       </div>
     </div>

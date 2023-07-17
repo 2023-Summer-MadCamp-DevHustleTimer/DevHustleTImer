@@ -1,24 +1,53 @@
-@font-face { /* 애플산돌고딕 폰트 적용 */
-  font-family: "BMHANNA_11yrs_ttf";
-  src: url("../../font/BMHANNA_11yrs_ttf.ttf") format("truetype");
-  font-weight: normal;
+@font-face {
+  font-family: "NanumSquareNeo";
+  src: url("../../font/NanumSquareNeo-Variable.ttf") format("truetype");
+  font-weight: 700;
 }
 
+
 * {
-  font-family: 'BMHANNA_11yrs_ttf', serif;
+  font-family: 'NanumSquareNeo', serif;
+  letter-spacing: 3px;
+  color: lightcyan;
+  text-shadow: 0px 0px 10px aqua;
 }
 
 .container {
   display: flex;
-  height: 100vh; /* 화면 높이를 기준으로 설정 */
+  height: 100vh;
+  /* 화면 높이를 기준으로 설정 */
+   background-color:  rgba(0,0,0,0.7) 
 }
 
 .left {
-  flex: 1; /* 남은 공간을 전부 차지 */
-  background-color: #f0f0f0;
+  flex: 1;
+  /* 남은 공간을 전부 차지 */
+  /* background-color: #f0f0f0; */
 }
 
 .right {
   aspect-ratio: 9 / 19;
-  background-color: #d3d3d3;
+  /* background-color: #d3d3d3; */
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.video-background video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  transform: translate(-50%, -50%);
 }

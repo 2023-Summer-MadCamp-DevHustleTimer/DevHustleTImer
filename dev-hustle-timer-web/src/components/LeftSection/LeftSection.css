@@ -1,10 +1,21 @@
 .left_section {
-  background-color: #CCC5B9;
+  /* background-color: #CCC5B9; */
+  
+  
   width: inherit;
-  height: 100%;
+  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 95%; 
+  margin:2.5vh;
+  transition: all 0.5s; 
+  border: 1px solid rgba(255,255,255,0.5); 
+  background:rgba(255,255,255,0.06);  
+}
+.left_section:hover{
+  background: rgba(255,255,255,0.15); 
+    transform: scale(1.03); 
 }
 
 .notice {
