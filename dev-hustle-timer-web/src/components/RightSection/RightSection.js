@@ -23,10 +23,10 @@ const RightSection = () => {
         </button>
       </div>
       <div className ="right_content">
-      <div className={`rotate-button ${whatRotated!=3 ? 'rotated180' : ''}`}>
+      <div className={`rotate-button ${whatRotated!=0 ? 'rotated180' : ''}`}>
           <Chat></Chat>
         </div>
-        <div className={`rotate-button ${whatRotated!=0 ? 'rotated180' : ''}`}>
+        <div className={`rotate-button ${whatRotated!=3 ? 'rotated180' : ''}`}>
           <Music></Music>
         </div>
         <div className={`rotate-button ${whatRotated!=1 ? 'rotated180' : ''}`}>

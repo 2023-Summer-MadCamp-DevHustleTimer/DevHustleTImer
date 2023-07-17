@@ -1,0 +1,74 @@
+.cchat {
+    position: relative;
+    display: flex;
+     height: 100%;  
+}
+
+.show-text {
+    /* background-color: red; */
+    flex:1;
+    overflow-y: scroll; 
+    margin-bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.input-text {
+    position: absolute;
+    bottom: 0px;
+    height: 100px;
+    width: 100%;
+    /* background-color: blue; */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.chat-bubble{
+    /* height: 100px; */
+    /* text-align:  */
+    
+    /* text-align: right; */
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.chat-bubble.chat-left{
+    text-align: left;
+    justify-content: left;
+    /* float: left; */
+}
+.chat-bubble.chat-right{
+    text-align: right;
+    justify-content: right;
+    /* float: right; */
+    color: white;
+    /* color: #FFB6C1; */
+     text-shadow: 0px 0px 10px #FFB6C1; 
+}
+textarea{
+    width: 100%;
+    color:white;
+    text-shadow: 0px 0px 10px #FFB6C1; 
+    background-color: rgba(255, 255, 255, 0);
+    border-color: (255, 255, 255, 0);
+    border:none;
+    outline:none;
+    font-size: 18px;
+
+}
+textarea:focus {
+    outline: none;
+
+    border-color: rgba(255, 255, 255, 0);
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: white;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: white;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: white;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: white;
+}
