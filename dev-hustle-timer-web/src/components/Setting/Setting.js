@@ -22,9 +22,13 @@ const Setting = () => {
 
   return (
     <div className="setting-container">
-      <div className="setting-title">
-        설정
+      <div className="room-number-info">
+        방 번호: 1234
       </div>
+      <div className="nickname-info">
+        닉네임: 홍길동
+      </div>
+      <div className="logout-buttons-wrapper">
       <div className="buttons-wrapper logout">
         <button
           onClick={async () => {
@@ -42,6 +46,7 @@ const Setting = () => {
         >
           방에서 나가기
         </button>
+      </div>
       </div>
       <div className="notification-input-text">
         <textarea

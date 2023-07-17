@@ -3,7 +3,7 @@ import "./RightSection.css";
 import Chat from "../Chat/Chat";
 import Music from "../Music/Music";
 import WhenToMeet from "../WhenToMeet/WhenToMeet";
-import Setting from "../Setting/Setting"
+import Setting from "../Setting/Setting";
 
 const RightSection = () => {
   console.log(process.env.REACT_APP_YOUTUBE_API_KEY);

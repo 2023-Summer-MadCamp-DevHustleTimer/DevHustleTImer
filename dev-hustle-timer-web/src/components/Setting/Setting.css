@@ -10,14 +10,24 @@
   font-size: 3rem;
 }
 
-.buttons-wrapper {
+.room-number-info {
+  margin-top: 3vh;
+  font-size: 2rem;
+}
+
+.nickname-info {
+  margin-top: 1vh;
+  font-size: 2rem;
+}
+
+.logout-buttons-wrapper {
   width: 100%;
   padding-top: 2vh;
   display: flex;
   justify-content: space-evenly;
 }
 
-.buttons-wrapper button {
+.logout-buttons-wrapper button {
   width: 30vh;
   height: 10vh;
   background-color: rgba(255,255,255,0.06);
@@ -26,7 +36,6 @@
   margin: 0;
   font-size: 2.5rem;
 }
-
 
 .notification-input-text {
   position: absolute;
