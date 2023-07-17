@@ -72,6 +72,7 @@ router.post('/join', async function (req, res, next) {
         //Todo: user.eventId is null이면 진행시켜~~
         if (!event) {
             res.status(404).json({ message: 'event not found' });
+            return;
         }
         if (!user) { 
             user = await User.create({ deviceId: deviceId, nickname: nickname });
