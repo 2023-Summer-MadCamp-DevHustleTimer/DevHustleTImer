@@ -25,6 +25,9 @@
     /* opacity: 1; */
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
+.show-text-inner{
+    transform: scaleY(-1);
+}
 
 
 .input-text {
@@ -41,6 +44,7 @@
     /* text-align:  */
 
     /* text-align: right; */
+    transform: scaleY(-1);
     margin: 20px;
 }
 
