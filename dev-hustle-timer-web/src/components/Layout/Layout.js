@@ -3,6 +3,7 @@ import LeftSection from "../LeftSection/LeftSection";
 import RightSection from "../RightSection/RightSection";
 import "./layout.css";
 import backimg from "../../img/Neon1.mp4";
+import LandingPage from "./LandingPage";
 
 const Layout = () => {
   const videoRef = useRef(null);
@@ -19,12 +20,14 @@ const Layout = () => {
 
         <video ref={videoRef} src ={backimg} loop autoPlay muted playB></video>
       </div>
-      <div className="left">
+
+      <LandingPage></LandingPage>
+      {/* <div className="left">
         <LeftSection></LeftSection>
       </div>
       <div className="right">
         <RightSection></RightSection>
-      </div>
+      </div> */}
     </div>
   );
 }
