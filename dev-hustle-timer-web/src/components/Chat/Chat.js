@@ -1,18 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Chat.css";
+import axios from "axios";
 
 const Chat = () => {
 
   const [message, setMessage] = useState("");
+  const [messageList, setMessageList] = useState([],);
 
-  const handleSend = () => {
+  useEffect(() => {
+
+  }, []);
+
+  const handleSend = async () => {
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
     console.log(message);
+    try {
+      let response = await axios.get('http://localhost:3001/api/me');
+      await axios.post('http://localhost:3001/api/message', {
+        text: message,
+      })
+
+    } catch (error) {
+      console.error("error")
+      //  console.log(error.response.data);
+    }
+
     setMessage("");
   }
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     setMessage(e.target.value);
+
+    // test
+    try {
+      let response = await axios.get('http://localhost:3001/api/message');
+      // console.log(response.data);
+      setMessageList(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleKeyPress = (e) => {
@@ -21,59 +47,27 @@ const Chat = () => {
       handleSend();       // 메시지를 전송합니다.
     }
   }
-
+  const renderChatBubbles = () => {
+    let reversedMessageList = [];
+  for (let i = messageList.length - 1; i >= 0; i--) {
+    reversedMessageList.push(messageList[i]);
+  }
+  console.log(reversedMessageList);
+    
+    
+    return reversedMessageList.map(function (data, index) {
+      var lr=(data.me ==true ? 'chat-right' : 'chat-left');
+      return (
+        <div className={`chat-bubble ${lr}`} key={index}>
+          {data.text}
+        </div>);
+    });
+  };
   return (
     <div class="cchat">
       <div className="show-text">
-        <div className="chat-bubble chat-left">
-          안녕하세요.
-          안녕하세요.
-          안녕하세요.
-          sdfdsf
-          안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.
-        </div>
-        <div className="chat-bubble chat-left">
-          안녕하세요.
-          안녕하세요.
-          안녕하세요.
-          sdfdsf
-          안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.
-        </div>
-        <div className="chat-bubble chat-left">
-          안녕하세요.
-          안녕하세요.
-          안녕하세요.
-          sdfdsf
-          안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.
-        </div>
-        <div className="chat-bubble chat-left">
-          안녕하세요.
+        {renderChatBubbles()}
 
-        </div>
-        <div className="chat-bubble chat-right">
-          안녕2
-        </div>
-        <div className="chat-bubble chat-right">
-          안녕2
-        </div>
-        <div className="chat-bubble chat-right">
-          안녕2
-        </div>
-        <div className="chat-bubble chat-right">
-          안녕2
-        </div>
-        <div className="chat-bubble chat-right">
-          안녕2
-        </div>
-        <div className="chat-bubble chat-right">
-          안녕2
-        </div>
-        <div className="chat-bubble chat-right">
-          안녕2 마지막
-        </div>
-        <div className="chat-bubble chat-right">
-          안녕3 마지막
-        </div>
 
       </div>
       <div className="input-text">
