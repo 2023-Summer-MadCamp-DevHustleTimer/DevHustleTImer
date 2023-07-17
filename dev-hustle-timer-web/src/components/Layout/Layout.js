@@ -21,13 +21,13 @@ const Layout = () => {
         <video ref={videoRef} src ={backimg} loop autoPlay muted playB></video>
       </div>
 
-      <LandingPage></LandingPage>
-      {/* <div className="left">
+      {/* <LandingPage></LandingPage> */}
+      <div className="left">
         <LeftSection></LeftSection>
       </div>
       <div className="right">
         <RightSection></RightSection>
-      </div> */}
+      </div>
     </div>
   );
 }
