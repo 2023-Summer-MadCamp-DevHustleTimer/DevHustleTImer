@@ -68,12 +68,13 @@ router.post('/join', async function (req, res, next) {
         console.log("event + "+eventNum+" "+typeof (eventNum));
         const event = await Event.findOne({ where: { eventNum: eventNum } })
         let user = await User.findOne({ where: { deviceId: deviceId } });
-        if (!user) {
-            user = await User.create({ deviceId: deviceId, nickname: nickname });
-        }
+        
         //Todo: user.eventId is null이면 진행시켜~~
         if (!event) {
             res.status(404).json({ message: 'event not found' });
+        }
+        if (!user) { 
+            user = await User.create({ deviceId: deviceId, nickname: nickname });
         }
         user.eventId = event.id;
         await user.save();
@@ -87,7 +88,7 @@ router.post('/join', async function (req, res, next) {
 router.post('/withdraw', async function (req, res, next) {
     const deviceId = req.headers['user-agent'];
     console.log(deviceId);
-    console.log(eventNum);
+    // console.log(eventNum);
     try {
 
         const user = await User.findOne({ where: { deviceId: deviceId } });

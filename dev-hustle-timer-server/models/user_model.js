@@ -6,7 +6,6 @@ class User extends Sequelize.Model {
             deviceId: {
                 type: Sequelize.STRING(255),
                 allowNull: true,
-                unique: true,
             },
             nickname: {
                 type: Sequelize.STRING(1000),
