@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
+import axios from "axios";
 import "./LeftSection.css";
 
 const divmod = (x, y) => [Math.floor(x / y), x % y];
 
 const LeftSection = () => {
-  const eventTime = moment("2023-07-19 21:00:00");
+
+  const [eventTime, setEventTime] = useState(moment("2023-07-19 21:00:00"));
   const currentTime = moment();
   const timeRemaining = moment.duration(eventTime.diff(currentTime)).asSeconds();
   const [tmp1, remainingSeconds] = divmod(timeRemaining, 60);
@@ -14,11 +16,18 @@ const LeftSection = () => {
 
   const [count, setCount] = useState(0);
   useEffect(() => {
+    getTargetTime();
     const id = setInterval(() => {
       setCount(c => c + 1);
     }, 1000);
     return () => clearInterval(id);
   }, []);
+  async function getTargetTime() {
+    var response = await axios.get('http://localhost:3001/api/me');
+    const utcTime = moment(response.data.event.endTime);
+    const koreaTime = utcTime.clone().add(0, 'hours');
+    setEventTime(koreaTime);
+  }
 
 
   return (
@@ -35,7 +44,7 @@ const LeftSection = () => {
           {remainingDays}일 {remainingHours}시간 {remainingMinutes}분 {parseInt(remainingSeconds)}초
         </span>
       </div>
-      <span  className="queto">
+      <span className="queto">
         It doesn’t work...... why?
         <br />
         It works..................... why?
