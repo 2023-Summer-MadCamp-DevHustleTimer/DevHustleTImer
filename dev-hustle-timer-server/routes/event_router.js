@@ -5,10 +5,10 @@ const { Event, User } = require('../models');
 router.post('/create', async function (req, res, next) { // 새로운 이벤트 생성
 
     const agentId = req.headers['user-agent'];
-    const { nickname, title, subtitle, } = req.body;
+    const { nickname, title, subtitle, endTime} = req.body;
 
     //  const endTime = req.body.endTime;
-    const endTime = new Date();
+   // const endTime = new Date();
 
 
     // 기존 eventNum 값들을 가져옵니다.
@@ -53,14 +53,23 @@ router.post('/create', async function (req, res, next) { // 새로운 이벤트 
 
 router.post('/join', async function (req, res, next) {
     const deviceId = req.headers['user-agent'];
-    const { nickname, eventNum } = req.body;
+    let { nickname, eventNum } = req.body;
     console.log(deviceId);
     console.log(eventNum);
+    if (typeof eventNum === 'string') {
+        const parsedEventNum = parseInt(eventNum, 10);
+        if (!isNaN(parsedEventNum)) {
+          eventNum = parsedEventNum;
+        } else {
+            res.status(404).json({ message: 'code invalid' });
+        }
+      }
     try {
+        console.log("event + "+eventNum+" "+typeof (eventNum));
         const event = await Event.findOne({ where: { eventNum: eventNum } })
         let user = await User.findOne({ where: { deviceId: deviceId } });
         if (!user) {
-            user = await User.create({ deviceId: agentId, nickname: nickname });
+            user = await User.create({ deviceId: deviceId, nickname: nickname });
         }
         //Todo: user.eventId is null이면 진행시켜~~
         if (!event) {
