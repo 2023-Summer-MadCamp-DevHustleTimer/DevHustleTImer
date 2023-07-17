@@ -39,8 +39,9 @@ router.get('/', async function (req, res, next) {
 });
 router.post('/', async function (req, res, next) {
 
-    ///새로운 메세지가 업데이트 되면 이벤트를 보내줘야함
     
+    
+
     const { text } = req.body;
     const deviceId = req.headers['user-agent'];
     try {
@@ -59,6 +60,8 @@ router.post('/', async function (req, res, next) {
     } catch (error) {
         res.status(404).json({ message: 'user not found' });
     }
+    ///새로운 메세지가 업데이트 되면 이벤트를 보내줘야함
+    req.io.emit('message', "킬");
 });
 module.exports
     = router;

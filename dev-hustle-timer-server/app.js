@@ -5,8 +5,39 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { sequelize } = require('./models');
 const cors =require('cors');
+const http = require('http');
 
 var app = express();
+app.use(cors());
+
+//socket init
+const server = http.createServer(app);
+const socketIo = require('socket.io');
+const io = socketIo(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST","PUT","DELETE","PATCH"],
+    credentials: true
+  }
+});
+io.on('connection', (socket) => {
+  console.log('New client connected');
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  }); 
+
+  socket.emit('message', 'Hello from server!');
+});
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
+
+ 
+server.listen(8080, () => {
+  console.log('Server started on port 8080');
+});
 
 //sequalize init
 sequelize.sync({ force: false }).then(() => {
@@ -19,7 +50,7 @@ sequelize.sync({ force: false }).then(() => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());
+
 
 app.use(logger('dev'));
 app.use(express.json());
