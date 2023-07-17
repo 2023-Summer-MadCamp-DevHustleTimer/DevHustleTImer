@@ -90,10 +90,10 @@ function LandingPage() {
                         endTime: newDate,
                     });
                     window.location.reload();
-                    console.log(response.data)
+                    // console.log(response.data)
                 } catch (error) {
                     console.log("error")
-                    console.log(error.response.data);
+                    // console.log(error.response.data);
                 }
 
             }}>
@@ -130,7 +130,7 @@ function LandingPage() {
                     // console.log(response.data)
                 } catch (error) {
                     console.log("error")
-                     console.log(error.response.data);
+                //  console.log(error.response.data);
                 }
 
             }}>

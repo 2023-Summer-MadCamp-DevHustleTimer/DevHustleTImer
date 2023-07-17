@@ -10,7 +10,7 @@ const Music = () => {
   const youtube_id = "LqME1y6Mlyg";
 
   const [title, setTitle] = useState("");
-  const [items, setItems] = useState([["a","uMjfPsdNko8"], ["b", "TWJ32Qda7nM"], ["c", "1Qq23yRs1CA"],["d","huTj4J0VELY"]]);
+  const [items, setItems] = useState([["a","uMjfPsdNko8"], ["b", "TWJ32Qda7nM"], ["c", "1Qq23yRs1CA"],["d","huTj4J0VELY"],["d","huTj4J0VELY"]]);
 
   const updateTitle = async () => {
     const { title } = await _getPlayList(youtube_id);

@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import "./Setting.css";
 import axios from 'axios';
 
 const Setting = () => {
   const [message, setMessage] = useState("");
-
+  const [nickname, setNickname] = useState("홍길동");
+  const [eventNum, setEventNum] = useState("0000");
+  
   const handleChange = (e) => {
     setMessage(e.target.value);
   }
@@ -19,14 +21,25 @@ const Setting = () => {
     console.log(message);
     setMessage("");
   }
+  useEffect(() => {
+    apiCall();
+    
+
+  }, []);
+  async function apiCall() {
+    var response= await axios.get('http://localhost:3001/api/me');
+    setNickname(response.data.nickname);
+    const paddedEventNum = String(response.data.event.eventNum).padStart(4, '0');
+    setEventNum(paddedEventNum);
+  }
 
   return (
     <div className="setting-container">
       <div className="room-number-info">
-        방 번호: 1234
+        방 번호: {eventNum}
       </div>
       <div className="nickname-info">
-        닉네임: 홍길동
+        닉네임: {nickname}
       </div>
       <div className="logout-buttons-wrapper">
       <div className="buttons-wrapper logout">
@@ -40,7 +53,7 @@ const Setting = () => {
               // console.log(response.data)
           } catch (error) {
               console.log("error")
-               console.log(error.response.data);
+              //  console.log(error.response.data);
           }
           }}
         >

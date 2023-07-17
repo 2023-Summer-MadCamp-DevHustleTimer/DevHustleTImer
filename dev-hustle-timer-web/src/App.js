@@ -8,10 +8,13 @@ import React,{useEffect} from "react";
 function reducer(currentState, action) {
   if (currentState === undefined) {
     return {
-      index: 1,
+      index: 0,//main 인덱스
     };
   }
   const newState = { ...currentState };
+  if (action.type === "CHANGE_INDEX") {
+    newState.index = action.index;
+  }
   return newState;
 }
 const store = createStore(reducer);
