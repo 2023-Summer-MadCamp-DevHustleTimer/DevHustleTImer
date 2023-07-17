@@ -4,7 +4,17 @@
   align-items: center;
 }
 
+.when-to-meet-title {
+  font-size: 2.4rem;
+}
+
+.when-to-meet-subject {
+  margin-top: 2vh;
+  font-size: 1.5rem;
+}
+
 .when-to-meet-check-area {
+  margin-top: 1vh;
   display: flex;
   flex-direction: column;
 }
@@ -12,19 +22,26 @@
 .day-of-the-week {
   display: flex;
   width: 31.5vh;
-  padding: 0 0 0 4.5vh;
+  padding: 0 0 0 5.5vh;
 }
 
 .day-cell {
   width: 4.5vh;
 }
 
+.when-to-meet-check-area-row-contents {
+  padding-top: 0.5vh;
+}
+
 .time-of-the-day {
+  display: flex;
+  flex-direction: column;
+  width: 5vh;
   padding-right: 0.5vh;
+  font-size: 0.7rem;
 }
 
 .time-cell {
-  width: 4vh;
   height: 2vh;
   display: flex;
   align-items: center;
@@ -45,16 +62,39 @@
 }
 
 .gridBox {
-  border: 1px solid black;
+  border: 1px solid lightcyan;
+  border-style: none solid solid none;
   width: 4.5vh;
   height: 1vh;
-  margin: -1px;
+  margin-left: -1px;
+  margin-top: -1px;
   cursor: pointer;
 }
 
 .buttons-wrapper {
   width: 100%;
-  padding-top: 1vh;
+  padding-top: 2vh;
   display: flex;
+  justify-content: space-evenly;
 }
 
+.buttons-wrapper button {
+  width: 12vh;
+  background-color: rgba(255,255,255,0.06);
+  border: 1px solid lightcyan;
+  border-radius: 10px;
+  margin: 0;
+  font-size: 1rem;
+}
+
+textarea{
+  width: 100%;
+  color:white;
+  text-shadow: 0px 0px 10px #FFB6C1; 
+  background-color: rgba(255, 255, 255, 0);
+  border-color: (255, 255, 255, 0);
+  border:none;
+  outline:none;
+  padding: 1vh;
+  font-size: 18px;
+}
