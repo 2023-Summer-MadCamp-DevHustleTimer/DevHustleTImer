@@ -122,7 +122,6 @@ function LandingPage() {
                 setInputValue('');
                 
                 try {
-                    const newDate = new Date(date + " " + time);
                     let response = await axios.post('http://localhost:3001/api/event/join', {
                         nickname: inputNickNameValue,
                         eventNum:inputValue,
