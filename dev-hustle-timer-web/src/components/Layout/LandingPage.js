@@ -13,6 +13,7 @@ function LandingPage() {
 
 
     const [title, setTitle] = useState('');
+    const [subtitle,setSubtitle] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [nickname, setNickname] = useState('');
@@ -40,9 +41,16 @@ function LandingPage() {
 
             <div className="sub-box">
                 <input
-                    placeholder='이벤트 제목을 입력해주세요'
+                    placeholder='이벤트 제목 입력해주세요'
                     value={title}
                     onChange={e => setTitle(e.target.value)}
+                />
+            </div>
+            <div className="sub-box">
+                <input
+                    placeholder='이벤트 내용 입력해주세요'
+                    value={subtitle}
+                    onChange={e => setSubtitle(e.target.value)}
                 />
             </div>
             <div className="sub-box">
@@ -56,6 +64,7 @@ function LandingPage() {
             <div className="sub-box">
                 <input
                     type="time"
+                    placeholder='이벤트 종료 시간을 입력해주세요'
                     value={time}
                     onChange={e => setTime(e.target.value)}
                 />
@@ -71,15 +80,16 @@ function LandingPage() {
                 console.log("방 생성 완료");
                 console.log(time);
                 console.log(date);
-               
+
                 try {
-                    const newDate = new Date(date+" "+time);
+                    const newDate = new Date(date + " " + time);
                     let response = await axios.post('http://localhost:3001/api/event/create', {
                         nickname: nickname,
-                    title: title,
-                    subtitle: "발표까지",
-                    endTime: newDate,
-                });
+                        title: title,
+                        subtitle: subtitle,
+                        endTime: newDate,
+                    });
+                    window.location.reload();
                     console.log(response.data)
                 } catch (error) {
                     console.log("error")
@@ -106,10 +116,24 @@ function LandingPage() {
                 <input placeholder='닉네임을 입력해주세요' value={inputNickNameValue}
                     onChange={handleInputNickNameChange} ></input>
             </div>
-            <div className="back" onClick={() => {
+            <div className="back" onClick={async () => {
                 console.log("참여버튼 눌렀어요.");
                 setInputNickNameValue('');
                 setInputValue('');
+                
+                try {
+                    const newDate = new Date(date + " " + time);
+                    let response = await axios.post('http://localhost:3001/api/event/join', {
+                        nickname: nickname,
+                        eventNum:inputValue,
+                    });
+                    window.location.reload();
+                    // console.log(response.data)
+                } catch (error) {
+                    console.log("error")
+                     console.log(error.response.data);
+                }
+
             }}>
 
                 <div>참여 하기</div>

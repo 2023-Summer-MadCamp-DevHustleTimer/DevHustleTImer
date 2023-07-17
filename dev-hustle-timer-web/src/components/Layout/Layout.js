@@ -39,12 +39,12 @@ const Layout = () => {
 
         <video ref={videoRef} src={backimg} loop autoPlay muted playB></video>
       </div>
-      {isSigned ? <div><div className="left">
+      {isSigned ? (<div className ="page-container"><div className="left">
         <LeftSection></LeftSection>
       </div>
         <div className="right">
           <RightSection></RightSection>
-        </div></div> : <LandingPage></LandingPage>}
+        </div></div>) : <LandingPage></LandingPage>}
 
     </div>
   );

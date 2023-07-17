@@ -52,3 +52,7 @@
   z-index: -1;
   transform: translate(-50%, -50%);
 }
+.page-container{
+  width: 100%;
+  display: flex;
+}
