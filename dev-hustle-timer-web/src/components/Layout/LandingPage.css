@@ -33,3 +33,121 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/* 여기는 방 참여 */
+.join-main-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    height: 40%;
+    transform: translate(-50%, -50%);
+    display:flex;
+    flex-direction: column;
+}
+.join-main-box >.room{
+    flex: 1;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.06);
+    margin-bottom:30px;
+    position: relative;
+}
+.room:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.03);
+}
+.join-main-box >.nickname{
+    flex: 1;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.06);
+    margin-bottom:30px;
+    position: relative;
+}
+.nickname:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.03);
+}
+
+.join-main-box >.back{
+    flex:1;
+    margin-bottom:30px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.06);
+    position: relative;
+}
+.back:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.03);
+}
+
+.join-main-box>div>input{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color:white;
+    text-shadow: 0px 0px 10px #FFB6C1; 
+    background-color: rgba(255, 255, 255, 0);
+    border-color: (255, 255, 255, 0);
+    border:none;
+    outline:none;
+    font-size: 30px;
+    text-align: center;
+}
+.back>div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+}
+
+/*여기는 이벤트 생성 */
+.create-main-box{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    height: 60%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+}
+.sub-box{
+    flex: 1;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.06);
+    margin-bottom:30px;
+    position: relative;
+}
+.sub-box:hover{
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.03);
+}
+.sub-box>input{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color:white;
+    text-shadow: 0px 0px 10px #FFB6C1; 
+    background-color: rgba(255, 255, 255, 0);
+    border-color: (255, 255, 255, 0);
+    border:none;
+    outline:none;
+    font-size: 30px;
+    text-align: center;
+}
+.sub-box>div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

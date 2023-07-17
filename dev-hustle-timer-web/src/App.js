@@ -3,6 +3,7 @@ import './App.css';
 import { createStore } from "redux";
 import { Provider, useSelector, useDispatch, connect } from "react-redux";
 import Layout from "./components/Layout/Layout";
+import React,{useEffect} from "react";
 
 function reducer(currentState, action) {
   if (currentState === undefined) {
@@ -16,6 +17,9 @@ function reducer(currentState, action) {
 const store = createStore(reducer);
 
 function App() {
+  useEffect(() => {
+    console.log("처음 실행됐어유1");
+  }, []);
   return (
     <div className="App">
       <Provider store={store}>
