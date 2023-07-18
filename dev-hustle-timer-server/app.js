@@ -64,14 +64,15 @@ var indexRouter = require('./routes/index');
 var eventRouter = require('./routes/event_router');
 var meRouter = require('./routes/me_router');
 var messageRouter = require('./routes/message_router');
+var musicRouter = require('./routes/music_router');
 var timetableRouter = require('./routes/timetable_router');
 
 app.use('/api', indexRouter);
 app.use('/api/event',eventRouter);
 app.use('/api/me',meRouter);
 app.use('/api/message',messageRouter);
+app.use('/api/music',musicRouter);
 app.use('/api/timetable',timetableRouter);
-
 
 
 
