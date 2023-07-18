@@ -16,9 +16,33 @@ const Setting = () => {
       handleSend();       // 메시지를 전송합니다.
     }
   }
-  const handleSend = () => {
+  async function handleSend(){
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
     console.log(message);
+    try {
+      let response = await axios.get("http://localhost:3001/api/me");
+      let sendMessage=message;
+      let sendSubmessage="";
+      if(sendMessage.startsWith("##")){
+        sendSubmessage=sendMessage.substring(2);
+        sendMessage="";
+        await axios.patch("http://localhost:3001/api/event/title", {
+        subtitle: sendSubmessage,
+      });
+      }
+      else if(sendMessage.startsWith("#")){
+        await axios.patch("http://localhost:3001/api/event/title", {
+          title: sendMessage.substring(1),
+        });
+      }
+      
+      
+      
+      
+    } catch (error) {
+      console.error(error);
+      //  console.log(error.response.data);
+    }
     setMessage("");
   }
   useEffect(() => {
