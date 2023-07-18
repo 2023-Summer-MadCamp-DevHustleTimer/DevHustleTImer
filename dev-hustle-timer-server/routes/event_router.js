@@ -110,5 +110,42 @@ router.post('/withdraw', async function (req, res, next) {
     }
 }
 );
+//title 교체
+router.patch('/title', async function(req, res, next) {
+    const deviceId = req.headers['user-agent'];
+    console.log(deviceId);
+    let { title, subtitle } = req.body;
+    console.log(subtitle);
+
+    try {
+        const user = await User.findOne({ where: { deviceId: deviceId } });
+        if (!user) {
+            return res.status(404).json({ message: 'user not found' });
+        }
+
+        const event = await Event.findOne({ where: { id: user.eventId } });
+        if (!event) {
+            return res.status(404).json({ message: 'event not found' });
+        }
+
+        // Update the event with the new title and subtitle
+        if (title != undefined)
+        event.title = title;
+        if (subtitle != undefined)
+        event.subtitle = subtitle;
+
+        // Save the updated event
+        await event.save();
+
+        // Respond with success message
+        res.status(200).json({ message: 'event updated successfully' });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'An error occurred' });
+    }
+    req.io.emit('event', "킬");
+});
+
 
 module.exports = router;
