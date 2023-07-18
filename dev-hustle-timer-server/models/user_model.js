@@ -27,7 +27,6 @@ class User extends Sequelize.Model {
     static associate(db) {
         db.User.belongsTo(db.Event, { foreignKey: 'eventId', targetKey: 'id' });
         db.User.hasMany(db.Notification, { foreignKey: 'writerId', sourceKey: 'id' });
-        db.User.hasMany(db.Music, { foreignKey: 'writerId', sourceKey: 'id' });
         db.User.hasMany(db.Message, { foreignKey: 'writerId', sourceKey: 'id' });
         db.User.hasOne(db.Event, { foreignKey: 'hostId', sourceKey: 'id' });
     }
