@@ -19,7 +19,7 @@ const RightSection = () => {
   };
   return (
     <div className="right_section">
-      <div className="navigator-wrapper">
+      <div className="navigator-wrapper onclick_magnify">
         <button className="navigator-button" onClick={handleBackClick}>
           <HiArrowUpLeft />
           이전

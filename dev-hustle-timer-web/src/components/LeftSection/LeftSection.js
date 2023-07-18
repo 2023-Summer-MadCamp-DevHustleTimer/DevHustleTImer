@@ -4,7 +4,16 @@ import axios from "axios";
 import "./LeftSection.css";
 import io from "socket.io-client";
 
-const divmod = (x, y) => [Math.floor(x / y), x % y];
+const divmod = function(x, y){
+
+  if(x<0){
+    return [ -Math.floor(-x/y),x%y];
+  }
+
+  return([
+  
+  Math.floor(x / y), x % y]);
+};
 
 const LeftSection = () => {
 
@@ -39,6 +48,8 @@ const LeftSection = () => {
     const koreaTime = utcTime.clone().add(0, 'hours');
     setEventTime(koreaTime);
   }
+
+  var str="";
 
 
   return (

@@ -11,6 +11,15 @@
 
 .right_section:hover {
   /* background: rgba(255, 255, 255, 0.15); */
+  /* transform: scale(1.03); */
+}
+.onclick_magnify{
+  transition: all 0.5s;
+  background:rgba(255,255,255,0.06);  
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.onclick_magnify:hover{
+  background: rgba(255, 255, 255, 0.15); 
   transform: scale(1.03);
 }
 
@@ -39,6 +48,7 @@
 .right_content {
   height: 96vh;
   position: relative;
+  margin-top: 2vh;
   /* background-color: gray; */
 
 }
