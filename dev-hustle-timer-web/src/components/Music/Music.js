@@ -1,4 +1,5 @@
-import React, { useEffect, useState} from "react";
+import axios from "axios";
+import React, { useEffect, useState, useRef} from "react";
 import { HiOutlineMenu } from "react-icons/hi";
 import { List, arrayMove } from 'react-movable';
 import YouTube from "react-youtube";
@@ -9,13 +10,12 @@ const Music = () => {
   const urlForm = "https://www.youtube.com/watch?v=";
   // 유튜브 URL 찾는 패턴
   const youtubeUrl = /(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch|embed)?(\?v=|\/)?(\S+)?/g;
-  const youtube_id = "LqME1y6Mlyg";
+  const loadingVideo = ["새 음악을 플레이리스트에 추가해 보세요!", "EMhKeVHboiA"];
 
-  const [title, setTitle] = useState("");
-  const [items, setItems] = useState([["a","uMjfPsdNko8"], ["b", "TWJ32Qda7nM"], ["c", "1Qq23yRs1CA"],["d","huTj4J0VELY"]]);
-
+  const [items, setItems] = useState([]);
   const [message, setMessage] = useState("");
 
+  // 입력값 관리 시작
   const handleChange = (e) => {
     setMessage(e.target.value);
   }
@@ -25,61 +25,73 @@ const Music = () => {
       handleLinkSubmission();       // 메시지를 전송합니다.
     }
   }
-  const handleLinkSubmission = () => {
+  const handleLinkSubmission = async () => {
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
     const playId = youtubeUrl.exec(message)[7];
     console.log(playId);
     setMessage("");
-    setItems([...items, ["searching...", playId]]);
-    console.log(items);
+    const { title } = await _getPlayList(playId);
+    const newItems = [...items, [title, playId]]
+    setItems(newItems);
+    postPlayList(newItems);
   }
+  // 입력값 관리 끝
 
-
-  const updateTitle = async () => {
-    const { title } = await _getPlayList(youtube_id);
-    console.log(title);
-    setTitle(title);
-  }
-
-  const updatePlayList = async () => {
-    const newItems = await Promise.all( 
-      items.map(async (e) => {
-        const { title } = await _getPlayList(e[1]);
-        return [title, e[1]];
+  // items 초기화 함수
+  const getPlayList = async () => {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/music`);
+    const newItems = await Promise.all(
+      response.data.data.map(async (value) => {
+        const { title } = await _getPlayList(value.videoId);
+        return [title, value.videoId];
       })
-    )
+    );
     setItems(newItems);
   }
 
-  useEffect(() => {
-   updateTitle();
-   updatePlayList();
-  }, []);
+  // newItems 게시 함수
+  const postPlayList = async (newItems) => {
+    const reqForm = newItems.map((value, index) => {
+      return {index: index, videoId: value[1], videoTitle: value[0]};
+    });
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/music`, {
+      data: reqForm
+    });
+    return;
+  }
 
   useEffect(() => {
-    console.log("updating...")
-    updatePlayList();
-    // api 호출하여 playlist 저장하기
-  },[items.length]);
+    getPlayList();
+  }, []);
 
   return (
     <div className="music_container">
       <YouTube
-        videoId={youtube_id}
+        videoId={(items.length === 0)?loadingVideo[1]:items[0][1]}
         id="player"
         opts={{
           width: "100%",
           height: "225",
         }}
+        onEnd={(event) => {
+          const newItems = [...items]; // 새로운 배열 생성
+          newItems.shift(); // 
+          if(newItems.length !== 0){
+            event.target.loadVideoById(newItems[0][1]);
+          }
+          setItems(newItems);
+          postPlayList(newItems);
+        }}
       ></YouTube>
       <div className="title">
-        {title}
+        {(items.length === 0)?loadingVideo[0]:items[0][0]}
       </div>
       <List
-        values={items.map((t, i) => playlistCell(t))}
+        values={items.slice(1).map((t, i) => playlistCell(t))}
         onChange={({ oldIndex, newIndex }) => {
-          setItems(arrayMove(items, oldIndex, newIndex));
-          // api 호출하여 playlist 저장하기
+          const newItems = arrayMove(items, oldIndex+1, newIndex+1);
+          setItems(newItems);
+          postPlayList(newItems);
         }}
         renderList={({ children, props }) => <ul {...props}>{children}</ul>}
         renderItem={({ value, props }) => <li {...props}>{value}</li>}
