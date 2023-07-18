@@ -22,7 +22,7 @@ const Layout = () => {
   async function apiInit() {
     try {
 
-      let response = await axios.get('http://localhost:3001/api/me', {
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`, {
       });
       console.log(response.data);
       setIsSigned(true);
