@@ -93,6 +93,10 @@ const Music = () => {
           setItems(newItems);
           postPlayList(newItems);
         }}
+        onReady={(event) => {
+          console.log("ready!!");
+          event.target.playVideo();
+        }}
         renderList={({ children, props }) => <ul {...props}>{children}</ul>}
         renderItem={({ value, props }) => <li {...props}>{value}</li>}
       />

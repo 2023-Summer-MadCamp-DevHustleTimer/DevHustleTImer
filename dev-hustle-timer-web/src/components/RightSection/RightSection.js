@@ -19,15 +19,15 @@ const RightSection = () => {
   };
   return (
     <div className="right_section">
-      <div className="navigator-wrapper onclick_magnify">
-        <button className="navigator-button" onClick={handleBackClick}>
+      <div className="navigator-wrapper">
+        <div className="navigator-button onclick_magnify" onClick={handleBackClick}>
           <HiArrowUpLeft />
           이전
-        </button>
-        <button className="navigator-button" onClick={handleClick}>
+        </div>
+        <div className="navigator-button onclick_magnify" onClick={handleClick}>
           다음
           <HiArrowUpRight />
-        </button>
+        </div>
       </div>
       <div className ="right_content">
       <div className={`rotate-button ${index!=0 ? 'rotated180' : ''}`}>
