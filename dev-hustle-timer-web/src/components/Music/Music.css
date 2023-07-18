@@ -7,16 +7,19 @@
 }
 
 .title {
-  padding: 0.9vh 2.5vh;
+  padding: 0.9vh 0;
+  padding-bottom: 1.1vh;
   text-align: start;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #FFFCF2;
 }
 
 ul {
+  height: 51vh;
   margin: 0;
-  padding: 0 2.5vh 2.5vh 2.5vh;
+  padding: 0 0.3vh 0 0.3vh;
   list-style-type: none;
+  overflow: auto;
 }
 
 li {
@@ -31,7 +34,7 @@ li {
   border-top: 1px solid #CCC5B9;
   padding: 0.5vh 0 0.5vh 0;
   color: #FFFCF2;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .cell-icon-wrapper {
@@ -50,4 +53,25 @@ li {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.music-input-text {
+  position: absolute;
+  bottom: 0px;
+  height: 7vh;
+  width: 100%;
+  /* background-color: blue; */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+textarea {
+  width: 100%;
+  color:white;
+  text-shadow: 0px 0px 10px #FFB6C1; 
+  background-color: rgba(255, 255, 255, 0);
+  border-color: (255, 255, 255, 0);
+  border:none;
+  outline:none;
+  padding: 1vh;
+  font-size: 18px;
 }

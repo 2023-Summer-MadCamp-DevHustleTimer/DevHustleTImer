@@ -5,19 +5,28 @@ import Music from "../Music/Music";
 import WhenToMeet from "../WhenToMeet/WhenToMeet";
 import Setting from "../Setting/Setting";
 import { useSelector,useDispatch } from "react-redux";
+import { HiArrowUpLeft, HiArrowUpRight } from "react-icons/hi2";
 
 const RightSection = () => {
   console.log(process.env.REACT_APP_YOUTUBE_API_KEY);
   const index = useSelector((state)=>state.index);
   const dispatch = useDispatch();
+  const handleBackClick = () => {
+    dispatch({type:"CHANGE_INDEX",index:(index+3)%4});
+  };
   const handleClick = () => {
     dispatch({type:"CHANGE_INDEX",index:(index+1)%4});
   };
   return (
     <div className="right_section">
-      <div className="navigator">
-        <button onClick={handleClick}>
-          버튼
+      <div className="navigator-wrapper">
+        <button className="navigator-button" onClick={handleBackClick}>
+          <HiArrowUpLeft />
+          이전
+        </button>
+        <button className="navigator-button" onClick={handleClick}>
+          다음
+          <HiArrowUpRight />
         </button>
       </div>
       <div className ="right_content">

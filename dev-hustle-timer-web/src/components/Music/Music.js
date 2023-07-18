@@ -7,10 +7,33 @@ import "./Music.css";
 const Music = () => {
   const noEmbed = 'https://noembed.com/embed?url=';
   const urlForm = "https://www.youtube.com/watch?v=";
+  // 유튜브 URL 찾는 패턴
+  const youtubeUrl = /(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch|embed)?(\?v=|\/)?(\S+)?/g;
   const youtube_id = "LqME1y6Mlyg";
 
   const [title, setTitle] = useState("");
-  const [items, setItems] = useState([["a","uMjfPsdNko8"], ["b", "TWJ32Qda7nM"], ["c", "1Qq23yRs1CA"],["d","huTj4J0VELY"],["d","huTj4J0VELY"]]);
+  const [items, setItems] = useState([["a","uMjfPsdNko8"], ["b", "TWJ32Qda7nM"], ["c", "1Qq23yRs1CA"],["d","huTj4J0VELY"]]);
+
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  }
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault(); // 새 줄을 만드는 동작을 막습니다.
+      handleLinkSubmission();       // 메시지를 전송합니다.
+    }
+  }
+  const handleLinkSubmission = () => {
+    // 메시지를 전송하는 로직이 이곳에 들어갑니다.
+    const playId = youtubeUrl.exec(message)[7];
+    console.log(playId);
+    setMessage("");
+    setItems([...items, ["searching...", playId]]);
+    console.log(items);
+  }
+
 
   const updateTitle = async () => {
     const { title } = await _getPlayList(youtube_id);
@@ -33,6 +56,12 @@ const Music = () => {
    updatePlayList();
   }, []);
 
+  useEffect(() => {
+    console.log("updating...")
+    updatePlayList();
+    // api 호출하여 playlist 저장하기
+  },[items.length]);
+
   return (
     <div className="music_container">
       <YouTube
@@ -47,11 +76,27 @@ const Music = () => {
         {title}
       </div>
       <List
-        values={items.map((t) => playlistCell(t))}
-        onChange={({ oldIndex, newIndex }) => setItems(arrayMove(items, oldIndex, newIndex))}
+        values={items.map((t, i) => playlistCell(t))}
+        onChange={({ oldIndex, newIndex }) => {
+          setItems(arrayMove(items, oldIndex, newIndex));
+          // api 호출하여 playlist 저장하기
+        }}
         renderList={({ children, props }) => <ul {...props}>{children}</ul>}
         renderItem={({ value, props }) => <li {...props}>{value}</li>}
       />
+      <div className="music-input-text">
+        <textarea
+          type="text"
+          placeholder="유튜브 링크를 통해 음악을 추가해보세요!"
+          rows={1}
+          value={message}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
+        // onChange={(e) => setMessage(e.target.value)}
+        // onKeyPress={(e) => e.key === 'Enter' ? handleSend() : null}
+        />
+        <input type="submit" style={{ display: "none" }} />
+      </div>
     </div>
   );
 }

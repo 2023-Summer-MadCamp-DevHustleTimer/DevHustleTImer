@@ -27,7 +27,8 @@
 }
 
 .right {
-  aspect-ratio: 9 / 19;
+  width: calc(100vh * 9/19);
+  height: 100vh;
   /* background-color: #d3d3d3; */
 }
 
