@@ -6,11 +6,11 @@ router.get('/', async function (req, res, next) {
     try {
         const user = await User.findOne({ where: { deviceId: deviceId } });
         const event = await Event.findOne({ where: { id: user.eventId } });
-        if (!user){
+        if (!user) {
             res.status(404).json({ message: 'user not found1' });
             return;
         }
-        if(!event){
+        if (!event) {
             res.status(404).json({ message: 'event not found' });
             return;
         }
@@ -20,26 +20,28 @@ router.get('/', async function (req, res, next) {
         var modifiedMessages = [];
         var modifiedMessage;
         for (const message of messages) {
-            const writer = await User.findOne({ where: { id: message.writerId } });
-            if (message.writerId !== user.id) {
-                modifiedMessage = { ...message.dataValues, me: false, writer:writer.dataValues};
+            const writer = await User.findOne({ where: { id: message.writerId }, paranoid: false });
+          
+                if (message.writerId !== user.id) {
+                    modifiedMessage = { ...message.dataValues, me: false, writer: writer.dataValues };
+
+                } else {
+                    modifiedMessage = { ...message.dataValues, me: true, writer: writer.dataValues };
+
+                }
+                // console.log(modifiedMessage);
+                modifiedMessages.push(modifiedMessage);
             
-            } else {
-                modifiedMessage = { ...message.dataValues, me: true, writer:writer.dataValues};
-                
-            }
-            // console.log(modifiedMessage);
-            modifiedMessages.push(modifiedMessage);
         }
         res.json(modifiedMessages);
     } catch (error) {
-        res.status(404).json({ message: 'user not found' });
+        res.status(404).json({ message: 'user not found3' });
     }
 });
 router.post('/', async function (req, res, next) {
 
-    
-    
+
+
 
     const { text } = req.body;
     const deviceId = req.headers['user-agent'];
