@@ -84,7 +84,7 @@ const Music = () => {
         renderList={({ children, props }) => <ul {...props}>{children}</ul>}
         renderItem={({ value, props }) => <li {...props}>{value}</li>}
       />
-      <div className="music-input-text">
+      <div className="music-input-text onclick_magnify">
         <textarea
           type="text"
           placeholder="유튜브 링크를 통해 음악을 추가해보세요!"

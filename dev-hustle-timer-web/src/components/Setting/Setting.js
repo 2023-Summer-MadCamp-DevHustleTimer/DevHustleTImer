@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Setting.css";
 import axios from 'axios';
 
@@ -6,7 +6,7 @@ const Setting = () => {
   const [message, setMessage] = useState("");
   const [nickname, setNickname] = useState("홍길동");
   const [eventNum, setEventNum] = useState("0000");
-  
+
   const handleChange = (e) => {
     setMessage(e.target.value);
   }
@@ -16,42 +16,49 @@ const Setting = () => {
       handleSend();       // 메시지를 전송합니다.
     }
   }
-  async function handleSend(){
+  async function handleSend() {
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
     console.log(message);
     try {
       let response = await axios.get("http://localhost:3001/api/me");
-      let sendMessage=message;
-      let sendSubmessage="";
-      if(sendMessage.startsWith("##")){
-        sendSubmessage=sendMessage.substring(2);
-        sendMessage="";
-        await axios.patch("http://localhost:3001/api/event/title", {
-        subtitle: sendSubmessage,
+
+      await axios.patch("http://localhost:3001/api/event/", {
+        order: message,
       });
-      }
-      else if(sendMessage.startsWith("#")){
-        await axios.patch("http://localhost:3001/api/event/title", {
-          title: sendMessage.substring(1),
-        });
-      }
-      
-      
-      
-      
     } catch (error) {
       console.error(error);
       //  console.log(error.response.data);
     }
     setMessage("");
+
+    // let response = await axios.get("http://localhost:3001/api/me");
+    // let sendMessage=message;
+    // let sendSubmessage="";
+    // if(sendMessage.startsWith("##")){
+    //   sendSubmessage=sendMessage.substring(2);
+    //   sendMessage="";
+    //   await axios.patch("http://localhost:3001/api/event/title", {
+    //   subtitle: sendSubmessage,
+    // });
+    // }
+    // else if(sendMessage.startsWith("#")){
+    //   await axios.patch("http://localhost:3001/api/event/title", {
+    //     title: sendMessage.substring(1),
+    //   });
+    // }
+
+
+
+
+
   }
   useEffect(() => {
     apiCall();
-    
+
 
   }, []);
   async function apiCall() {
-    var response= await axios.get('http://localhost:3001/api/me');
+    var response = await axios.get('http://localhost:3001/api/me');
     setNickname(response.data.nickname);
     const paddedEventNum = String(response.data.event.eventNum).padStart(4, '0');
     setEventNum(paddedEventNum);
@@ -66,26 +73,26 @@ const Setting = () => {
         닉네임: {nickname}
       </div>
       <div className="logout-buttons-wrapper">
-      <div className="buttons-wrapper logout">
-        <button
-          onClick={async () => {
-            try {
-            
-              let response = await axios.post('http://localhost:3001/api/event/withdraw', {
-              });
-              window.location.reload();
-              // console.log(response.data)
-          } catch (error) {
-              console.log("error")
-              //  console.log(error.response.data);
-          }
-          }}
-        >
-          방에서 나가기
-        </button>
+        <div className="buttons-wrapper logout">
+          <button className="onclick_magnify"
+            onClick={async () => {
+              try {
+
+                let response = await axios.post('http://localhost:3001/api/event/withdraw', {
+                });
+                window.location.reload();
+                // console.log(response.data)
+              } catch (error) {
+                console.log("error")
+                //  console.log(error.response.data);
+              }
+            }}
+          >
+            방에서 나가기
+          </button>
+        </div>
       </div>
-      </div>
-      <div className="notification-input-text">
+      <div className="notification-input-text onclick_magnify">
         <textarea
           type="text"
           placeholder="새로운 공지사항을 입력하고 엔터를 누르세요"

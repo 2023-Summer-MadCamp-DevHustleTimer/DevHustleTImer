@@ -128,7 +128,7 @@ const Chat = () => {
 
   return (
     <div className="cchat">
-      <div className="show-text" >
+      <div className="show-text onclick_magnify" >
         
         <div className="show-text-inner" >
           <div ref={scrollRef} />
@@ -140,7 +140,7 @@ const Chat = () => {
 
 
       </div>
-      <div className="input-text">
+      <div className="input-text onclick_magnify">
         <textarea
           type="text"
           placeholder="여기에 채팅을 입력하고 엔터를 누르세요"
