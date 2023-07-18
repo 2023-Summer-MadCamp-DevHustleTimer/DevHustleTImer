@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 class User extends Sequelize.Model {
     static initiate(sequelize) {
-        const str0 = "0".repeat(2427);
+        const str0 = "0".repeat(336);
         User.init({
             deviceId: {
                 type: Sequelize.STRING(255),
@@ -12,7 +12,7 @@ class User extends Sequelize.Model {
                 allowNull: true,
             },
             possibleTime: {
-                type: Sequelize.STRING(5000),
+                type: Sequelize.STRING(1000),
                 allowNull: false,
                 defaultValue: str0,
             }
