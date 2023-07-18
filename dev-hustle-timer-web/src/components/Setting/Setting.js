@@ -20,9 +20,9 @@ const Setting = () => {
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
     console.log(message);
     try {
-      let response = await axios.get("http://localhost:3001/api/me");
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`);
 
-      await axios.patch("http://localhost:3001/api/event/", {
+      await axios.patch(`${process.env.REACT_APP_API_URL}/api/event`, {
         order: message,
       });
     } catch (error) {
@@ -30,27 +30,6 @@ const Setting = () => {
       //  console.log(error.response.data);
     }
     setMessage("");
-
-    // let response = await axios.get("http://localhost:3001/api/me");
-    // let sendMessage=message;
-    // let sendSubmessage="";
-    // if(sendMessage.startsWith("##")){
-    //   sendSubmessage=sendMessage.substring(2);
-    //   sendMessage="";
-    //   await axios.patch("http://localhost:3001/api/event/title", {
-    //   subtitle: sendSubmessage,
-    // });
-    // }
-    // else if(sendMessage.startsWith("#")){
-    //   await axios.patch("http://localhost:3001/api/event/title", {
-    //     title: sendMessage.substring(1),
-    //   });
-    // }
-
-
-
-
-
   }
   useEffect(() => {
     apiCall();
@@ -58,7 +37,7 @@ const Setting = () => {
 
   }, []);
   async function apiCall() {
-    var response = await axios.get('http://localhost:3001/api/me');
+    var response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`);
     setNickname(response.data.nickname);
     const paddedEventNum = String(response.data.event.eventNum).padStart(4, '0');
     setEventNum(paddedEventNum);
@@ -78,7 +57,7 @@ const Setting = () => {
             onClick={async () => {
               try {
 
-                let response = await axios.post('http://localhost:3001/api/event/withdraw', {
+                let response = await axios.post(`${process.env.REACT_APP_API_URL}/api/event/withdraw`, {
                 });
                 window.location.reload();
                 // console.log(response.data)

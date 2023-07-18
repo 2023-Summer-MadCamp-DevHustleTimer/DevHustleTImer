@@ -25,8 +25,8 @@ const Chat = () => {
 
   async function getMessages(tmp) {
     try {
-      var response = await axios.get("http://localhost:3001/api/me");
-      response = await axios.get("http://localhost:3001/api/message");
+      var response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`);
+      response = await axios.get(`${process.env.REACT_APP_API_URL}/api/message`);
       setMessageList(response.data);
       if (tmp) {
         scrollToBottom();
@@ -41,8 +41,8 @@ const Chat = () => {
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
     console.log(message);
     try {
-      let response = await axios.get("http://localhost:3001/api/me");
-      await axios.post("http://localhost:3001/api/message", {
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/message`, {
         text: message,
       });
     } catch (error) {

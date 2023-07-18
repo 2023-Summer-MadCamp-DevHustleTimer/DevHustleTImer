@@ -13,7 +13,7 @@ function LandingPage() {
 
 
     const [title, setTitle] = useState('');
-    const [subtitle,setSubtitle] = useState('');
+    const [subtitle, setSubtitle] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [nickname, setNickname] = useState('');
@@ -83,7 +83,7 @@ function LandingPage() {
 
                 try {
                     const newDate = new Date(date + " " + time);
-                    let response = await axios.post('http://localhost:3001/api/event/create', {
+                    let response = await axios.post(`${process.env.REACT_APP_API_URL}/api/event/create`, {
                         nickname: nickname,
                         title: title,
                         subtitle: subtitle,
@@ -120,17 +120,17 @@ function LandingPage() {
                 console.log("참여버튼 눌렀어요.");
                 setInputNickNameValue('');
                 setInputValue('');
-                
+
                 try {
-                    let response = await axios.post('http://localhost:3001/api/event/join', {
+                    let response = await axios.post(`${process.env.REACT_APP_API_URL}/api/event/join`, {
                         nickname: inputNickNameValue,
-                        eventNum:inputValue,
+                        eventNum: inputValue,
                     });
                     window.location.reload();
                     // console.log(response.data)
                 } catch (error) {
                     console.log("error")
-                //  console.log(error.response.data);
+                    //  console.log(error.response.data);
                 }
 
             }}>

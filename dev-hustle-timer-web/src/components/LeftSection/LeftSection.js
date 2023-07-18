@@ -41,7 +41,7 @@ const LeftSection = () => {
     return () => clearInterval(id);
   }, []);
   async function getTargetTime() {
-    var response = await axios.get('http://localhost:3001/api/me');
+    var response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`);
     setTitle(response.data.event.title);
     setSubtitle(response.data.event.subtitle);
     const utcTime = moment(response.data.event.endTime);
