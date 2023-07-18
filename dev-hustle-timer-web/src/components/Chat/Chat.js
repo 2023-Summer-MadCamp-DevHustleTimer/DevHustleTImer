@@ -51,6 +51,7 @@ const Chat = () => {
     }
 
     setMessage("");
+    getMessages(true);
   };
 
   const handleChange = async (e) => {
@@ -123,18 +124,21 @@ const Chat = () => {
     //   );
     // });
     return renderList;
-  };
+  }; 
 
   return (
     <div className="cchat">
       <div className="show-text" >
-
+        
         <div className="show-text-inner" >
+          <div ref={scrollRef} />
           {/* 스크롤 위치로 이동시킬 요소 */}
           {renderChatBubbles()}
+          
 
         </div>
-        <div ref={scrollRef} />
+
+
       </div>
       <div className="input-text">
         <textarea

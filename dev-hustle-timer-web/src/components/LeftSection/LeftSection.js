@@ -40,6 +40,8 @@ const LeftSection = () => {
     setEventTime(koreaTime);
   }
 
+  var str="";
+  
 
   return (
     <div className="left_section">
