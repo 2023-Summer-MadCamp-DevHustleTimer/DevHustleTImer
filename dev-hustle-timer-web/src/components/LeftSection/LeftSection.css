@@ -5,6 +5,7 @@
   width: inherit;
   
   display: flex;
+  align-items: center; 
   flex-direction: column;
   justify-content: space-between;
   height: 95%; 
@@ -20,6 +21,7 @@
 
 .notice {
   padding-top: 4vh;
+  width: 60%;
   font-size: 2rem;
 }
 
