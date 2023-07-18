@@ -5,10 +5,10 @@ const { Event, User } = require('../models');
 router.post('/create', async function (req, res, next) { // 새로운 이벤트 생성
 
     const agentId = req.headers['user-agent'];
-    const { nickname, title, subtitle, endTime} = req.body;
+    const { nickname, title, subtitle, endTime } = req.body;
 
     //  const endTime = req.body.endTime;
-   // const endTime = new Date();
+    // const endTime = new Date();
 
 
     // 기존 eventNum 값들을 가져옵니다.
@@ -59,23 +59,23 @@ router.post('/join', async function (req, res, next) {
     if (typeof eventNum === 'string') {
         const parsedEventNum = parseInt(eventNum, 10);
         if (!isNaN(parsedEventNum)) {
-          eventNum = parsedEventNum;
+            eventNum = parsedEventNum;
         } else {
             res.status(404).json({ message: 'code invalid' });
             return;
         }
-      }
+    }
     try {
-        console.log("event + "+eventNum+" "+typeof (eventNum));
+        console.log("event + " + eventNum + " " + typeof (eventNum));
         const event = await Event.findOne({ where: { eventNum: eventNum } })
         let user = await User.findOne({ where: { deviceId: deviceId } });
-        
+
         //Todo: user.eventId is null이면 진행시켜~~
         if (!event) {
             res.status(404).json({ message: 'event not found' });
             return;
         }
-        if (!user) { 
+        if (!user) {
             user = await User.create({ deviceId: deviceId, nickname: nickname });
         }
         user.eventId = event.id;
@@ -96,11 +96,13 @@ router.post('/withdraw', async function (req, res, next) {
         const user = await User.findOne({ where: { deviceId: deviceId } });
         if (!user) {
             res.status(404).json({ message: 'user not found' });
+            return;
 
         }
         const event = await Event.findOne({ where: { id: user.eventId } });
         if (!event) {
             res.status(404).json({ message: 'event not found' });
+            return;
         }
         await user.destroy();
         res.json(event);
@@ -110,8 +112,55 @@ router.post('/withdraw', async function (req, res, next) {
     }
 }
 );
+
+router.patch('/', async function (req, res, next) {
+    const deviceId = req.headers['user-agent'];
+    try {
+        const user = await User.findOne({ where: { deviceId: deviceId } });
+        const { order } = req.body;
+        if (!user) {
+            res.status(404).json({ message: 'user not found' });
+            return;
+        }
+
+        const event = await Event.findOne({ where: { id: user.eventId } });
+        if (!event) {
+            res.status(404).json({ message: 'event not found' });
+            return;
+        }
+
+
+        if (order.startsWith("##")) {
+            event.subtitle = order.substring(2);
+            await event.save();
+            res.status(200).json({ message: 'event updated successfully' });
+        }
+        else if (order.startsWith("#")) {
+            event.title = order.substring(1);
+            await event.save();
+            res.status(200).json({ message: 'event updated successfully' });
+        }
+        else if (order.startsWith("!")) {
+            let koreaTimeStr = order.substring(1);  // 한국 시간 문자열, ISO 8601 형식
+
+            let date = new Date(koreaTimeStr);
+            console.log("sss");
+            event.endTime = koreaTimeStr;
+            await event.save();
+            res.status(200).json({ message: 'event updated successfully' });
+        }
+        else {
+            res.status(404).json({ message: 'order not found' });
+        }
+
+    } catch {
+        res.status(404).json({ message: 'order not found' });
+    }
+    req.io.emit('event', "킬");
+});
+
 //title 교체
-router.patch('/title', async function(req, res, next) {
+router.patch('/title', async function (req, res, next) {
     const deviceId = req.headers['user-agent'];
     console.log(deviceId);
     let { title, subtitle } = req.body;
@@ -130,9 +179,9 @@ router.patch('/title', async function(req, res, next) {
 
         // Update the event with the new title and subtitle
         if (title != undefined)
-        event.title = title;
+            event.title = title;
         if (subtitle != undefined)
-        event.subtitle = subtitle;
+            event.subtitle = subtitle;
 
         // Save the updated event
         await event.save();
