@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 
 
  
-server.listen(80, () => {
+server.listen(PORT_SOCKET, () => {
   console.log('Server started on port 80');
 });
 

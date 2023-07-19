@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('dev-hustle-timer-server:server');
 var http = require('http');
+const dotenv = require('dotenv');
+dotenv.config();
 
 /**
  * Get port from environment and store in Express.
@@ -14,7 +16,7 @@ var http = require('http');
 
 
 //Todo
-var port = normalizePort(process.env.PORT || '443');
+var port = normalizePort(process.env.PORT_API.toString());
 app.set('port', port);
 
 /**
