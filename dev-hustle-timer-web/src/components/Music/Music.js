@@ -1,4 +1,5 @@
 import axios from "axios";
+import io from "socket.io-client";
 import React, { useEffect, useState, useRef} from "react";
 import { HiOutlineMenu } from "react-icons/hi";
 import { List, arrayMove } from 'react-movable';
@@ -46,6 +47,7 @@ const Music = () => {
         return [title, value.videoId];
       })
     );
+    console.log("music get: ", newItems);
     setItems(newItems);
   }
 
@@ -62,6 +64,16 @@ const Music = () => {
 
   useEffect(() => {
     getPlayList();
+    const socket = io(process.env.REACT_APP_SOCKET_URL);
+
+    socket.on("musicUpdate", (msg) => {
+      console.log("musicUpdate: ", msg);
+      getPlayList();
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (
@@ -73,6 +85,10 @@ const Music = () => {
           width: "100%",
           height: "225",
         }}
+        onReady={(event) => {
+          console.log("ready!!");
+          event.target.playVideo();
+        }}
         onEnd={(event) => {
           const newItems = [...items]; // 새로운 배열 생성
           newItems.shift(); // 
@@ -81,6 +97,9 @@ const Music = () => {
           }
           setItems(newItems);
           postPlayList(newItems);
+        }}
+        onError={(event) => {
+          console.log("YoutubeErr: ", event);
         }}
       ></YouTube>
       <div className="title">
@@ -93,15 +112,12 @@ const Music = () => {
           setItems(newItems);
           postPlayList(newItems);
         }}
-        onReady={(event) => {
-          console.log("ready!!");
-          event.target.playVideo();
-        }}
         renderList={({ children, props }) => <ul {...props}>{children}</ul>}
         renderItem={({ value, props }) => <li {...props}>{value}</li>}
       />
       <div className="music-input-text onclick_magnify">
         <textarea
+          className="music-textarea"
           type="text"
           placeholder="유튜브 링크를 통해 음악을 추가해보세요!"
           rows={1}

@@ -30,7 +30,7 @@ const LeftSection = () => {
 
   useEffect(() => {
     getTargetTime();
-    const socket = io("http://localhost:8080");
+    const socket = io(process.env.REACT_APP_SOCKET_URL);
     socket.on("event", (msg) => {
       console.log("new events");
       getTargetTime();
@@ -67,7 +67,7 @@ const LeftSection = () => {
       <span className="queto">
         It doesn’t work...... why?
         <br />
-        It works..................... why?
+        It works.................. why?
       </span>
     </div>
   );
