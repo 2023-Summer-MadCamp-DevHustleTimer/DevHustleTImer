@@ -99,11 +99,11 @@ function LandingPage() {
                             },
                         }
                     );
-                    console.log(response.headers['content-length'], response.headers,response.data, response.data['uuid']);
+                    console.log(response.headers['content-length'], response.headers, response.data, response.data['uuid']);
 
                     localStorage.setItem('token', response.data['uuid']);
                     console.log(localStorage.getItem('token'));
-                    // window.location.reload();
+                    window.location.reload();
 
                 } catch (error) {
                     console.log(error)
