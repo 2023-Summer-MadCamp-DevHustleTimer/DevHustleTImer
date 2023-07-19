@@ -2,11 +2,23 @@ import React, { useEffect, useState, useRef } from "react";
 import "./Chat.css";
 import axios from "axios";
 import io from "socket.io-client";
+import { max } from "moment/moment";
 
 const Chat = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const scrollRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    console.log("mouse enter", isHovered);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    console.log("mouse leave");
+  };
 
   useEffect(() => {
     const socket = io(process.env.REACT_APP_SOCKET_URL);
@@ -15,7 +27,7 @@ const Chat = () => {
 
     socket.on("message", (msg) => {
       console.log("new messages");
-      getMessages(false);
+      getMessages(true);
     });
 
     return () => {
@@ -38,8 +50,11 @@ const Chat = () => {
         }
       });
       setMessageList(response.data);
-      if (tmp) {
-        scrollToBottom();
+      if (tmp && !isHovered) {
+        console.log(isHovered);
+        setTimeout(() => {
+          scrollToBottom();
+        }, 0);
       }
       // 스크롤을 가장 하단으로 이동
     } catch (error) {
@@ -85,8 +100,13 @@ const Chat = () => {
 
   const scrollToBottom = () => {
     if (scrollRef.current) {
-      //움직이는 방법 다시 연구해보자.
+      const { scrollHeight, clientHeight } = scrollRef.current;
+      const maxScrollTop = scrollHeight - clientHeight;
+      const scrollPosition = scrollRef.current.scrollTop;
+      console.log("스크롤", maxScrollTop, scrollPosition);
+
       scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+
     }
   };
 
@@ -148,7 +168,9 @@ const Chat = () => {
     <div className="cchat">
       <div className="show-text onclick_magnify" >
 
-        <div className="show-text-inner" >
+        <div className="show-text-inner" ref={scrollRef} onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}>
+          {/* <div ref={scrollRef} /> */}
           <div ref={scrollRef} />
           {/* 스크롤 위치로 이동시킬 요소 */}
           {renderChatBubbles()}
