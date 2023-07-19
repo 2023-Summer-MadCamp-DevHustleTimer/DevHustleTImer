@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const { Event, User } = require('../models');
-
 router.post('/create', async function (req, res, next) { // 새로운 이벤트 생성
 
-    const agentId = req.headers['user-agent'];
+    const agentId = req.headers['authorization'] || null;
+    console.log("agentId "+agentId);
     const { nickname, title, subtitle, endTime } = req.body;
 
     //  const endTime = req.body.endTime;
@@ -29,8 +29,10 @@ router.post('/create', async function (req, res, next) { // 새로운 이벤트 
 
     try {
         let user = await User.findOne({ where: { deviceId: agentId } });
+        const { v4: uuidv4 } = require('uuid');
+        const uuid = uuidv4();
         if (!user) {
-            user = await User.create({ deviceId: agentId, nickname: nickname });
+            user = await User.create({ deviceId: uuid, nickname: nickname });
         }
         //Todo: user.eventId is null이면 진행시켜~~
         const event = await Event.create({
@@ -43,16 +45,16 @@ router.post('/create', async function (req, res, next) { // 새로운 이벤트 
         });
         user.eventId = event.id;
         await user.save();
-
-        res.json(event);
+        res.json({event,uuid});
     } catch (error) {
         console.error(error);
+        
         res.status(500).send('Error creating event');
     }
 });
 
 router.post('/join', async function (req, res, next) {
-    const deviceId = req.headers['user-agent'];
+    const deviceId = req.headers['authorization'] || null;
     let { nickname, eventNum } = req.body;
     console.log(deviceId);
     console.log(eventNum);
@@ -69,6 +71,9 @@ router.post('/join', async function (req, res, next) {
         console.log("event + " + eventNum + " " + typeof (eventNum));
         const event = await Event.findOne({ where: { eventNum: eventNum } })
         let user = await User.findOne({ where: { deviceId: deviceId } });
+        const { v4: uuidv4 } = require('uuid');
+
+        const uuid = uuidv4();
 
         //Todo: user.eventId is null이면 진행시켜~~
         if (!event) {
@@ -76,11 +81,11 @@ router.post('/join', async function (req, res, next) {
             return;
         }
         if (!user) {
-            user = await User.create({ deviceId: deviceId, nickname: nickname });
+            user = await User.create({ deviceId: uuid, nickname: nickname });
         }
         user.eventId = event.id;
         await user.save();
-        res.json(event);
+        res.json({event,uuid});
 
     } catch {
         res.status(404).json({ message: 'event not found' });
@@ -88,7 +93,7 @@ router.post('/join', async function (req, res, next) {
 
 });// 이벤트에 참가
 router.post('/withdraw', async function (req, res, next) {
-    const deviceId = req.headers['user-agent'];
+    const deviceId = req.headers['authorization'] || null;
     console.log(deviceId);
     // console.log(eventNum);
     try {
@@ -114,7 +119,7 @@ router.post('/withdraw', async function (req, res, next) {
 );
 
 router.patch('/', async function (req, res, next) {
-    const deviceId = req.headers['user-agent'];
+    const deviceId = req.headers['authorization'] || null;
     try {
         const user = await User.findOne({ where: { deviceId: deviceId } });
         const { order } = req.body;
@@ -161,7 +166,7 @@ router.patch('/', async function (req, res, next) {
 
 //title 교체
 router.patch('/title', async function (req, res, next) {
-    const deviceId = req.headers['user-agent'];
+    const deviceId = req.headers['authorization'] || null;
     console.log(deviceId);
     let { title, subtitle } = req.body;
     console.log(subtitle);

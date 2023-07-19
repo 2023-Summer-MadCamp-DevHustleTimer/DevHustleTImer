@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { Message, Event, User } = require('../models');
 router.get('/', async function (req, res, next) {
-    const deviceId = req.headers['user-agent'];
+    const deviceId = req.headers['authorization'] || null;
     try {
         const user = await User.findOne({ where: { deviceId: deviceId } });
         const event = await Event.findOne({ where: { id: user.eventId } });
@@ -44,7 +44,7 @@ router.post('/', async function (req, res, next) {
 
 
     const { text } = req.body;
-    const deviceId = req.headers['user-agent'];
+    const deviceId = req.headers['authorization'] || null;
     try {
         const user = await User.findOne({ where: { deviceId: deviceId } });
         const event = await Event.findOne({ where: { id: user.eventId } });

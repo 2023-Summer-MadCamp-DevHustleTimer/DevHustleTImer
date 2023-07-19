@@ -8,6 +8,7 @@ const cors = require('cors');
 const http = require('http');
 const dotenv = require('dotenv');
 dotenv.config();
+const bodyParser = require('body-parser');
 
 
 var app = express();
@@ -59,6 +60,7 @@ app.set('view engine', 'jade');
 
 
 
+app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

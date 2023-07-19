@@ -4,7 +4,8 @@ var router = express.Router();
 const { User ,Event} = require('../models');
 
 router.get('/',async function(req,res,next){
-    const deviceId = req.headers['user-agent'];
+    const deviceId = req.headers['authorization'] || null;
+    console.log("api me "+deviceId);
     if (!deviceId) {
         // User-Agent 정보가 없는 경우
         res.status(400).json({ message: 'User-Agent header is missing' });
@@ -25,7 +26,8 @@ router.get('/',async function(req,res,next){
 });
 //patch api/me -> 나의 테이블 정보(숫자로 이루어진 배열[24*2*7 길이]임)를 주면 mysql에 갱신한다.
 router.patch('/',async function(req,res,next){
-    const deviceId = req.headers['user-agent'];
+    const deviceId = req.headers['authorization'] || null;
+
     if (!deviceId) {
         res.status(400).json({ message: 'User-Agent header is missing' });
     } else {

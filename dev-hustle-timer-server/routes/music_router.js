@@ -4,7 +4,7 @@ const { User, Event, Music } = require('../models');
 
 router.get('/', async function (req, res) {
   console.log("GET /api/music logic");
-  const deviceId = req.headers['user-agent'];
+  const deviceId = req.headers['authorization'] || null;
   try {
     const user = await User.findOne({ where: { deviceId: deviceId } });
     if (!user){
@@ -28,7 +28,7 @@ router.get('/', async function (req, res) {
 
 router.post('/', async function (req, res) {
   console.log("POST /api/music logic");
-  const deviceId = req.headers['user-agent'];
+  const deviceId = req.headers['authorization'] || null;
   try {
     const user = await User.findOne({ where: { deviceId: deviceId } });
     if (!user){

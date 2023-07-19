@@ -4,8 +4,8 @@ class User extends Sequelize.Model {
         const str0 = "0".repeat(336);
         User.init({
             deviceId: {
-                type: Sequelize.STRING(255),
-                allowNull: true,
+                type: Sequelize.STRING(1000),
+                allowNull: false,
             },
             nickname: {
                 type: Sequelize.STRING(1000),

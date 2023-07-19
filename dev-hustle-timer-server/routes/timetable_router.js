@@ -3,7 +3,7 @@ var router = express.Router();
 
 const { User, Event } = require('../models');
 router.get('/', async function (req, res, next) {
-    const deviceId = req.headers['user-agent'];
+    const deviceId = req.headers['authorization'] || null;
     if (!deviceId) {
         res.status(400).json({ message: 'User-Agent header is missing' });
     } else {
