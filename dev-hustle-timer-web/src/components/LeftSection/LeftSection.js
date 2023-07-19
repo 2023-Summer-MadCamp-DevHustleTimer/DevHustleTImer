@@ -59,10 +59,10 @@ const LeftSection = () => {
   return (
     <div className="left_section">
       <div className="notice">
-        <span>{title}</span>
+        <pre>{title}</pre>
       </div>
       <div className="timer">
-        <span className="goal">{subtitle}</span>
+        <pre className="goal">{subtitle}</pre>
         <br />
         <span className="time-left">
           {remainingDays}일 {remainingHours}시간 {remainingMinutes}분 {parseInt(remainingSeconds)}초
