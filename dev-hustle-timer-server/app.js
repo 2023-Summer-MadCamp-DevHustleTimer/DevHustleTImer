@@ -4,8 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { sequelize } = require('./models');
-const cors =require('cors');
+const cors = require('cors');
 const http = require('http');
+const dotenv = require('dotenv');
+dotenv.config();
+
 
 var app = express();
 app.use(cors());
@@ -15,14 +18,20 @@ const server = http.createServer(app);
 const socketIo = require('socket.io');
 const io = socketIo(server, {
   cors: {
-    origin:'*',
+    origin: '*',
   }
 });
 io.on('connection', (socket) => {
   console.log('New client connected');
+  console.log('Socket Id:', socket.id);
+  console.log('Connected clients:', Object.keys(io.sockets.sockets));
+  var clientIp = socket.request.connection.remoteAddress || socket.request.headers['x-forwarded-for'];
+  console.log('Client IP:', clientIp);
+  console.log("----------------\n")
+
   socket.on('disconnect', () => {
     console.log('Client disconnected');
-  }); 
+  });
 
   socket.emit('message', 'Hello from server!');
 });
@@ -32,8 +41,8 @@ app.use((req, res, next) => {
 });
 
 
- 
-server.listen(PORT_SOCKET, () => {
+
+server.listen(process.env.PORT_SOCKET, () => {
   console.log('Server started on port 80');
 });
 
@@ -66,11 +75,11 @@ var musicRouter = require('./routes/music_router');
 var timetableRouter = require('./routes/timetable_router');
 
 app.use('/api', indexRouter);
-app.use('/api/event',eventRouter);
-app.use('/api/me',meRouter);
-app.use('/api/message',messageRouter);
-app.use('/api/music',musicRouter);
-app.use('/api/timetable',timetableRouter);
+app.use('/api/event', eventRouter);
+app.use('/api/me', meRouter);
+app.use('/api/message', messageRouter);
+app.use('/api/music', musicRouter);
+app.use('/api/timetable', timetableRouter);
 
 
 

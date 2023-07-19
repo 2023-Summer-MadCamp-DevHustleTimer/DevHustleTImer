@@ -46,11 +46,14 @@ router.post('/', async function (req, res) {
         eventId: user.eventId,
       })
     });
+    
+    res.status(201).json({ message: "playList updated!" });
     req.io.emit("musicUpdate", "playList is updated by someone!");
-    return res.status(201).json({ message: "playList updated!" });
+    return ;
   } catch (error) {
     console.log("error: ", error);
-    return res.status(401).json({ message: 'user not found' });
+    res.status(401).json({ message: 'user not found' });
+    return 
   }
 });
 
