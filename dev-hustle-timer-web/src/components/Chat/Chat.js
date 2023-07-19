@@ -27,7 +27,7 @@ const Chat = () => {
 
     socket.on("message", (msg) => {
       console.log("new messages");
-      getMessages(true && !isHovered);
+      getMessages(true);
     });
 
     return () => {
@@ -85,7 +85,7 @@ const Chat = () => {
     }
 
     setMessage("");
-    getMessages(true && !isHovered);
+    getMessages(true);
   };
 
   const handleChange = async (e) => {
