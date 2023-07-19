@@ -28,6 +28,14 @@ const Music = () => {
   }
   const handleLinkSubmission = async () => {
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
+    if(!message.localeCompare("clear")){
+      console.log("clear queue");
+      const newItems = [];
+      setMessage("");
+      setItems(newItems);
+      postPlayList(newItems);
+      return;
+    }
     const playId = youtubeUrl.exec(message)[7];
     console.log(playId);
     setMessage("");
@@ -108,6 +116,13 @@ const Music = () => {
         }}
         onError={(event) => {
           console.log("YoutubeErr: ", event);
+          const newItems = [...items]; // 새로운 배열 생성
+          newItems.shift(); // 
+          if(newItems.length !== 0){
+            event.target.loadVideoById(newItems[0][1]);
+          }
+          setItems(newItems);
+          postPlayList(newItems);
         }}
       ></YouTube>
       <div className="title">
