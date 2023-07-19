@@ -80,19 +80,33 @@ function LandingPage() {
                 console.log("방 생성 완료");
                 console.log(time);
                 console.log(date);
+                console.log(localStorage.getItem('token'));
 
                 try {
+
                     const newDate = new Date(date + " " + time);
-                    let response = await axios.post(`${process.env.REACT_APP_API_URL}/api/event/create`, {
-                        nickname: nickname,
-                        title: title,
-                        subtitle: subtitle,
-                        endTime: newDate,
-                    });
-                    window.location.reload();
-                    // console.log(response.data)
+                    let response = await axios.post(
+                        `${process.env.REACT_APP_API_URL}/api/event/create`,
+                        {
+                            nickname: nickname,
+                            title: title,
+                            subtitle: subtitle,
+                            endTime: newDate,
+                        },
+                        {
+                            headers: {
+                                authorization: "sfsdf", // uuid는 여기에 해당하는 변수나 값을 사용하세요
+                            },
+                        }
+                    );
+                    console.log(response.headers['content-length'], response.headers,response.data, response.data['uuid']);
+
+                    localStorage.setItem('token', response.data['uuid']);
+                    console.log(localStorage.getItem('token'));
+                    // window.location.reload();
+
                 } catch (error) {
-                    console.log("error")
+                    console.log(error)
                     // console.log(error.response.data);
                 }
 
@@ -125,7 +139,12 @@ function LandingPage() {
                     let response = await axios.post(`${process.env.REACT_APP_API_URL}/api/event/join`, {
                         nickname: inputNickNameValue,
                         eventNum: inputValue,
+                    }, {
+                        headers: {
+                            'authorization': localStorage.getItem('token'),
+                        }
                     });
+                    localStorage.setItem('token', response.data['uuid']);
                     window.location.reload();
                     // console.log(response.data)
                 } catch (error) {

@@ -25,8 +25,18 @@ const Chat = () => {
 
   async function getMessages(tmp) {
     try {
-      var response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`);
-      response = await axios.get(`${process.env.REACT_APP_API_URL}/api/message`);
+      var response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`, {
+        headers: {
+          'authorization': localStorage.getItem('token'),
+        }
+      });
+
+
+      response = await axios.get(`${process.env.REACT_APP_API_URL}/api/message`, {
+        headers: {
+          'authorization': localStorage.getItem('token'),
+        }
+      });
       setMessageList(response.data);
       if (tmp) {
         scrollToBottom();
@@ -41,9 +51,17 @@ const Chat = () => {
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
     console.log(message);
     try {
-      let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`);
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`, {
+        headers: {
+          'authorization': localStorage.getItem('token'),
+        }
+      });
       await axios.post(`${process.env.REACT_APP_API_URL}/api/message`, {
         text: message,
+      }, {
+        headers: {
+          'authorization': localStorage.getItem('token'),
+        }
       });
     } catch (error) {
       console.error("error");
@@ -91,7 +109,7 @@ const Chat = () => {
         <div className={`chat-bubble ${lr}`} key={i}>
           {current.me == false ?
             <div className="name">
-              김현수
+              {current.writer.nickname}
             </div> : <span></span>}
           <div className={"content-time" + " " + lr}>
             {current.me == true ? <p className={`time ${lr}`}>
@@ -124,17 +142,17 @@ const Chat = () => {
     //   );
     // });
     return renderList;
-  }; 
+  };
 
   return (
     <div className="cchat">
       <div className="show-text onclick_magnify" >
-        
+
         <div className="show-text-inner" >
           <div ref={scrollRef} />
           {/* 스크롤 위치로 이동시킬 요소 */}
           {renderChatBubbles()}
-          
+
 
         </div>
 

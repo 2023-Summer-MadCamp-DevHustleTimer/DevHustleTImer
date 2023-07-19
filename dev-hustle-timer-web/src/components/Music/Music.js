@@ -40,7 +40,11 @@ const Music = () => {
 
   // items 초기화 함수
   const getPlayList = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/music`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/music`, {
+      headers: {
+        'authorization': localStorage.getItem('token'),
+      }
+    });
     const newItems = await Promise.all(
       response.data.data.map(async (value) => {
         const { title } = await _getPlayList(value.videoId);
@@ -58,6 +62,10 @@ const Music = () => {
     });
     await axios.post(`${process.env.REACT_APP_API_URL}/api/music`, {
       data: reqForm
+    }, {
+      headers: {
+        'authorization': localStorage.getItem('token'),
+      }
     });
     return;
   }

@@ -21,8 +21,11 @@ const Layout = () => {
   }, []);
   async function apiInit() {
     try {
-
-      let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`, {
+      console.log("authorization2 "+localStorage.getItem('token'));
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`,{
+        headers: {
+          'authorization': localStorage.getItem('token'),
+        }
       });
       console.log(response.data);
       setIsSigned(true);

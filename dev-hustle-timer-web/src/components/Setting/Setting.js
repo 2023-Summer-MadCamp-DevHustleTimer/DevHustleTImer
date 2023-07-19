@@ -20,10 +20,18 @@ const Setting = () => {
     // 메시지를 전송하는 로직이 이곳에 들어갑니다.
     console.log(message);
     try {
-      let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`);
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`, {
+        headers: {
+          'authorization': localStorage.getItem('token'),
+        }
+      });
 
       await axios.patch(`${process.env.REACT_APP_API_URL}/api/event`, {
         order: message,
+      }, {
+        headers: {
+          'authorization': localStorage.getItem('token'),
+        }
       });
     } catch (error) {
       console.error(error);
@@ -37,7 +45,11 @@ const Setting = () => {
 
   }, []);
   async function apiCall() {
-    var response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`);
+    var response = await axios.get(`${process.env.REACT_APP_API_URL}/api/me`, {
+      headers: {
+        'authorization': localStorage.getItem('token'),
+      }
+    });
     setNickname(response.data.nickname);
     const paddedEventNum = String(response.data.event.eventNum).padStart(4, '0');
     setEventNum(paddedEventNum);
@@ -58,6 +70,10 @@ const Setting = () => {
               try {
 
                 let response = await axios.post(`${process.env.REACT_APP_API_URL}/api/event/withdraw`, {
+                }, {
+                  headers: {
+                    'authorization': localStorage.getItem('token'),
+                  }
                 });
                 window.location.reload();
                 // console.log(response.data)
