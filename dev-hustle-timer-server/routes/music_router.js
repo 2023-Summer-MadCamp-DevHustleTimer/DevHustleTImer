@@ -39,13 +39,16 @@ router.post('/', async function (req, res) {
     if(!req.body.data){
       return res.status(404).json({ message: 'no playlist passed...' });
     }
-    req.body.data.forEach((value) => {
-      Music.create({
+
+    const data = req.body.data;
+    for(let i=0; i <data.length; i++){
+      const value = data[i];
+      await Music.create({
         videoId: value.videoId,
         position: value.index,
         eventId: user.eventId,
       })
-    });
+    }
     
     res.status(201).json({ message: "playList updated!" });
     req.io.emit("musicUpdate", "playList is updated by someone!");
