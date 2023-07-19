@@ -15,9 +15,7 @@ const server = http.createServer(app);
 const socketIo = require('socket.io');
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST","PUT","DELETE","PATCH"],
-    credentials: true
+    origin:'*',
   }
 });
 io.on('connection', (socket) => {
@@ -35,8 +33,8 @@ app.use((req, res, next) => {
 
 
  
-server.listen(8080, () => {
-  console.log('Server started on port 8080');
+server.listen(80, () => {
+  console.log('Server started on port 80');
 });
 
 //sequalize init

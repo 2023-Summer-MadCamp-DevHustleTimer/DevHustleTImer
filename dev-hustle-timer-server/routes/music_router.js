@@ -46,6 +46,7 @@ router.post('/', async function (req, res) {
         eventId: user.eventId,
       })
     });
+    req.io.emit("musicUpdate", "playList is updated by someone!");
     return res.status(201).json({ message: "playList updated!" });
   } catch (error) {
     console.log("error: ", error);
