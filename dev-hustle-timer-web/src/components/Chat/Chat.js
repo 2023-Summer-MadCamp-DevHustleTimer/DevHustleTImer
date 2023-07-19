@@ -8,7 +8,7 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const scrollRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(true);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -17,7 +17,7 @@ const Chat = () => {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    console.log("mouse leave");
+    console.log("mouse leave",isHovered);
   };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Chat = () => {
 
     socket.on("message", (msg) => {
       console.log("new messages");
-      getMessages(true);
+      getMessages(true && !isHovered);
     });
 
     return () => {
@@ -50,8 +50,9 @@ const Chat = () => {
         }
       });
       setMessageList(response.data);
-      if (tmp && !isHovered) {
-        console.log(isHovered);
+      console.log("ii"+isHovered);
+      if (tmp) {
+        
         setTimeout(() => {
           scrollToBottom();
         }, 0);
@@ -84,7 +85,7 @@ const Chat = () => {
     }
 
     setMessage("");
-    getMessages(true);
+    getMessages(true && !isHovered);
   };
 
   const handleChange = async (e) => {
