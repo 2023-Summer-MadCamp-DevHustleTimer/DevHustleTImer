@@ -1,0 +1,80 @@
+.music_container {
+  width: 100%;
+  height: 100%;
+  /* background-color: #403D39; */
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  height: 4.6vh;
+  margin: 0.9vh 0;
+  padding-bottom: 1.1vh;
+  text-align: start;
+  font-size: 1.2rem;
+  color: #FFFCF2;
+  overflow: auto;
+}
+
+ul {
+  height: calc(74vh - 230px);
+  margin: 0;
+  padding: 0 0.3vh 0 0.3vh;
+  list-style-type: none;
+  overflow: auto;
+}
+
+li {
+  list-style-type: none;
+}
+
+.playlist-cell {
+  height: 3vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1px solid #CCC5B9;
+  padding: 0.5vh 0 0.5vh 0;
+  color: #FFFCF2;
+  font-size: 1rem;
+}
+
+.cell-icon-wrapper {
+  display: flex;
+  width: 2.5vh;
+  height: 2.5vh;
+  flex: 0 0 2.5vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell-title-wrapper {
+  align-items: center;
+  padding-left: 0.2vh;
+  padding-right: 0.5vh;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-input-text {
+  position: absolute;
+  bottom: 0px;
+  height: 7vh;
+  width: 100%;
+  /* background-color: blue; */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.music-textarea {
+  width: 95%;
+  height: 90%;
+  color:white;
+  text-shadow: 0px 0px 10px #FFB6C1; 
+  background-color: rgba(255, 255, 255, 0);
+  border-color: (255, 255, 255, 0);
+  border:none;
+  outline:none;
+  padding: 1vh;
+  font-size: 18px;
+}

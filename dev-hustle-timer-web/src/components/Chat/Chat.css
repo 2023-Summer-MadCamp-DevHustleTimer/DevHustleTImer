@@ -1,0 +1,143 @@
+.cchat {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* perspective: 1000px; */
+
+
+}
+
+.show-text {
+    /* background-color: red; */
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+    /* .input-text의 높이만큼 공간을 확보 */
+    /* overflow-y: auto; */
+    /* display: hidden; */
+    /* flex-direction: column; */
+    /* opacity: 1; */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.show-text-inner {
+    transform: scaleY(-1);
+    position: absolute;
+    width: 100%;
+    /* display: flex; */
+}
+
+
+.input-text {
+    position: absolute;
+    bottom: 0px;
+    height: 100px;
+    width: 100%;
+    /* background-color: blue; */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.chat-bubble {
+    /* height: 100px; */
+    /* text-align:  */
+
+    /* text-align: right; */
+    transform: scaleY(-1);
+    margin: 20px;
+
+}
+
+.chat-bubble.chat-left {
+    text-align: left;
+    justify-content: left;
+    margin-right: 80px;
+    /* float: left; */
+}
+
+.chat-bubble.chat-right {
+    text-align: left;
+    justify-content: left;
+    /* margin-left: auto; */
+    /* float: right; */
+
+}
+
+.chat-right {
+    color: white;
+    /* color: #FFB6C1; */
+    text-shadow: 0px 0px 10px #FFB6C1;
+}
+
+.name {
+    font-size: 12px;
+}
+
+.content-time {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: end;
+}
+
+.content-time.chat-left {
+    justify-content: start;
+}
+
+.content {
+    max-width: 80%;
+    word-wrap: break-word;
+    display: inline-block;
+}
+
+.time {
+    font-size: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 8px;
+    display: inline-block
+}
+
+textarea {
+    width: 100%;
+    color: white;
+    text-shadow: 0px 0px 10px #FFB6C1;
+    background-color: rgba(255, 255, 255, 0);
+    border-color: (255, 255, 255, 0);
+    border: none;
+    outline: none;
+    font-size: 18px;
+
+}
+
+textarea:focus {
+    outline: none;
+
+    border-color: rgba(255, 255, 255, 0);
+}
+
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: white;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: white;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: white;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: white;
+}

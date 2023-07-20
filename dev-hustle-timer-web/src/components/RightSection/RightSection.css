@@ -1,0 +1,81 @@
+.right_section {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+  margin-top: 2.5vh;
+  margin-bottom: 2.5vh;
+  margin-right: 2.5vh;
+  transition: all 0.5s;
+  /* border: 1px solid rgba(255, 255, 255, 0.5); */
+}
+
+.right_section:hover {
+  /* background: rgba(255, 255, 255, 0.15); */
+  /* transform: scale(1.03); */
+}
+.onclick_magnify{
+  transition: transform 0.5s;
+  background:rgba(255,255,255,0.06);  
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.onclick_magnify:hover{
+  background: rgba(255, 255, 255, 0.15); 
+  transform: scale(1.03);
+}
+
+.navigator-wrapper {
+  height: 4vh;
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: space-between;
+}
+
+.navigator-button {
+  width: 47%;
+  height: 3vh;
+  background-color: rgba(255,255,255,0);
+  /* border: 1px solid lightcyan;
+  border-radius: 10px; */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+
+.right_content {
+  height: 96vh;
+  position: relative;
+  margin-top: 2vh;
+  /* background-color: gray; */
+
+}
+
+.rotate-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(0deg);
+  transition: transform 0.5s,visibility 0.2s;
+  /* Animation duration, change as needed */
+   backface-visibility: hidden; 
+  visibility: visible;
+
+}
+
+.rotated90 {
+  transform: rotateY(90deg);
+  /* 3D horizontal rotation */
+}
+
+.rotated180 {
+  transform: rotateY(180deg);
+  visibility: hidden;
+  /* display:none; */
+}
+.rotated270{
+  transform: rotateY(270deg);
+}

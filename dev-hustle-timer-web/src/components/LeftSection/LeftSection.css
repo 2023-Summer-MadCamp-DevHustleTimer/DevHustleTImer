@@ -1,0 +1,45 @@
+.left_section {
+  /* background-color: #CCC5B9; */
+  
+  
+  width: inherit;
+  
+  display: flex;
+  align-items: center; 
+  flex-direction: column;
+  justify-content: space-between;
+  height: 95%; 
+  margin:2.5vh;
+  transition: all 0.5s; 
+  border: 1px solid rgba(255,255,255,0.5); 
+  background:rgba(255,255,255,0.06);  
+}
+.left_section:hover{
+  background: rgba(255,255,255,0.15); 
+    transform: scale(1.03); 
+}
+
+.notice {
+  padding-top: 4vh;
+  width: 60%;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.timer {
+  padding-bottom: 5vh;
+}
+
+.goal {
+  font-size: 5rem;
+  margin: 0;
+}
+
+.time-left {
+  font-size: 5rem;
+}
+
+.queto {
+  padding-bottom: 4vh;
+  font-size: 1.7rem;
+}
